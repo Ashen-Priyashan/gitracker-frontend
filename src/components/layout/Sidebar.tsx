@@ -10,6 +10,8 @@ import {
 
 import Logo from "./Logo";
 import SidebarItem from "./SidebarItem";
+import ApiStatusCard from "./ApiStatusCard";
+import ThemeToggle from "./ThemeToggle";
 
 function Sidebar() {
   return (
@@ -27,10 +29,10 @@ function Sidebar() {
       </nav>
 
       <div className="mt-auto">
-        {/* API Status Card */}
+        <ApiStatusCard />
 
-        {/* Theme Toggle */}
-      </div>
+     <ThemeToggle />
+    </div>
     </aside>
   );
 }
