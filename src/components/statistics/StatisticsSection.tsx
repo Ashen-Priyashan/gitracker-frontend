@@ -24,7 +24,7 @@ function StatisticsSection() {
     <section className="mt-8 rounded-3xl border border-slate-200 bg-white px-8 py-10">
       <div className="text-center">
         <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
-          GitTracker Analytics
+          Gitracker Analytics
         </p>
 
         <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900">
