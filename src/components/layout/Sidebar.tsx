@@ -3,7 +3,6 @@ import {
   FolderGit2,
   History,
   House,
-  Search,
   Settings,
   User,
 } from "lucide-react";
@@ -24,7 +23,7 @@ function Sidebar() {
       <nav className="mt-10 flex flex-col gap-2">
         <SidebarItem icon={House} label="Home" to="/" />
 
-        <SidebarItem icon={Search} label="Search" to="/" />
+        
 
         {username && (
           <>
