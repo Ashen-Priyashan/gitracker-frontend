@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/HomePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProfilePage from "../pages/ProfilePage";
+import RepositoryPage from "../pages/RepositoryPage";
 
 function AppRoutes() {
   return (
@@ -11,6 +12,10 @@ function AppRoutes() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/profile/:username" element={<ProfilePage />} />
+          <Route
+            path="/profile/:username/repositories"
+            element={<RepositoryPage />}
+          />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />
