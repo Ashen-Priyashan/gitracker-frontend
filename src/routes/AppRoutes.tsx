@@ -12,10 +12,11 @@ function AppRoutes() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/profile/:username" element={<ProfilePage />} />
+          <Route
+            path="/profile/:username/repositories"
+            element={<RepositoryPage />}
+          />
         </Route>
-          path="/profile/:username/repositories"
-          element={<RepositoryPage />}
-          
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
