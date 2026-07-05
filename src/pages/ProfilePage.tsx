@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import AnalyticsSummary from "../components/profile/AnalyticsSummary";
+import LanguageCard from "../components/profile/LanguageCard";
+import RepositoryPreview from "../components/profile/RepositoryPreview";
 import ProfileError from "../components/profile/ProfileError";
 import ProfileHeader from "../components/profile/ProfileHeader";
 import ProfileLoading from "../components/profile/ProfileLoading";
@@ -64,7 +66,21 @@ function ProfilePage() {
     );
   }
 
-  return <ProfileHeader user={profile.user} />;
+  return (
+  <div className="space-y-6">
+    <ProfileHeader user={profile.user} />
+
+    <AnalyticsSummary analytics={profile.analytics} />
+
+    <LanguageCard
+      language={profile.analytics.mostUsedLanguage}
+    />
+
+    <RepositoryPreview
+      repositories={profile.repositories}
+    />
+  </div>
+);
 }
 
 export default ProfilePage;
