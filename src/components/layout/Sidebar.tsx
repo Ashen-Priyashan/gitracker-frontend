@@ -1,38 +1,70 @@
 import {
-  House,
-  Search,
-  User,
-  FolderGit2,
   ChartColumn,
+  FolderGit2,
   History,
+  House,
   Settings,
+  User,
 } from "lucide-react";
+import { useParams } from "react-router-dom";
 
+import ApiStatusCard from "./ApiStatusCard";
 import Logo from "./Logo";
 import SidebarItem from "./SidebarItem";
-import ApiStatusCard from "./ApiStatusCard";
 import ThemeToggle from "./ThemeToggle";
 
 function Sidebar() {
+  const { username } = useParams<{ username: string }>();
+
   return (
     <aside className="flex h-screen w-72 flex-col border-r border-slate-200 bg-white px-6 py-8">
       <Logo />
 
       <nav className="mt-10 flex flex-col gap-2">
-        <SidebarItem icon={House} label="Home" active />
-        <SidebarItem icon={Search} label="Search" />
-        <SidebarItem icon={User} label="Profiles" />
-        <SidebarItem icon={FolderGit2} label="Repositories" />
-        <SidebarItem icon={ChartColumn} label="Analytics" />
-        <SidebarItem icon={History} label="Recent Searches" />
-        <SidebarItem icon={Settings} label="Settings" />
+        <SidebarItem icon={House} label="Home" to="/" />
+
+        
+
+        {username && (
+          <>
+            <SidebarItem
+              icon={User}
+              label="Profile"
+              to={`/profile/${encodeURIComponent(username)}`}
+            />
+
+            <SidebarItem
+              icon={FolderGit2}
+              label="Repositories"
+              to={`/profile/${encodeURIComponent(username)}/repositories`}
+            />
+
+            <SidebarItem
+              icon={ChartColumn}
+              label="Analytics"
+              to={`/profile/${encodeURIComponent(username)}/analytics`}
+            />
+          </>
+        )}
+
+        <SidebarItem
+          icon={History}
+          label="Recent Searches"
+          to="/recent-searches"
+        />
+
+        <SidebarItem
+          icon={Settings}
+          label="Settings"
+          to="/settings"
+        />
       </nav>
 
       <div className="mt-auto">
         <ApiStatusCard />
 
-     <ThemeToggle />
-    </div>
+        <ThemeToggle />
+      </div>
     </aside>
   );
 }
