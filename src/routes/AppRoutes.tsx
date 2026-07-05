@@ -5,6 +5,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import ProfilePage from "../pages/ProfilePage";
 import RepositoryPage from "../pages/RepositoryPage";
 import AnalyticsPage from "../pages/AnalyticsPage";
+import RecentSearchesPage from "../pages/RecentSearchesPage";
 
 function AppRoutes() {
   return (
@@ -20,6 +21,10 @@ function AppRoutes() {
           <Route
             path="/profile/:username/analytics"
             element={<AnalyticsPage />}
+          />
+          <Route
+            path="/recent-searches"
+            element={<RecentSearchesPage />}
           />
         </Route>
 
