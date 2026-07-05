@@ -8,6 +8,8 @@ import ProfileError from "../components/profile/ProfileError";
 import ProfileHeader from "../components/profile/ProfileHeader";
 import ProfileLoading from "../components/profile/ProfileLoading";
 import { getProfileSummary } from "../services/profileService";
+import { addRecentSearch } from "../utils/recentSearches";
+
 import type {
   ApiError,
   ProfileSummary,
@@ -35,6 +37,7 @@ function ProfilePage() {
         const profileSummary = await getProfileSummary(username);
 
         setProfile(profileSummary);
+        addRecentSearch(profileSummary.user.username);
       } catch (requestError) {
         if (axios.isAxiosError<ApiError>(requestError)) {
           setError(
