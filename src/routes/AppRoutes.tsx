@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProfilePage from "../pages/ProfilePage";
 import RepositoryPage from "../pages/RepositoryPage";
+import AnalyticsPage from "../pages/AnalyticsPage";
 
 function AppRoutes() {
   return (
@@ -15,6 +16,10 @@ function AppRoutes() {
           <Route
             path="/profile/:username/repositories"
             element={<RepositoryPage />}
+          />
+          <Route
+            path="/profile/:username/analytics"
+            element={<AnalyticsPage />}
           />
         </Route>
 
