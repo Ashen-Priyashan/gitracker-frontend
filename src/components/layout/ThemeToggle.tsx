@@ -11,7 +11,7 @@ function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white py-3 transition hover:bg-slate-100"
+      className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl border border-border bg-surface py-3 text-heading transition hover:opacity-80"
     >
       {isDarkTheme ? (
         <Sun size={18} />
