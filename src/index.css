@@ -22,6 +22,23 @@
   --color-danger: #ef4444;
 }
 
+:root[data-theme="dark"] {
+  /* Backgrounds */
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+
+  /* Text */
+  --color-heading: #f8fafc;
+  --color-body: #94a3b8;
+
+  /* Borders */
+  --color-border: #334155;
+
+  /* Brand */
+  --color-primary: #3b82f6;
+  --color-primary-hover: #60a5fa;
+}
+
 body {
   margin: 0;
   background: var(--color-background);
