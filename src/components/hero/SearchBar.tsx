@@ -17,8 +17,8 @@ function SearchBar() {
   };
 
   return (
-    <div className="flex w-full max-w-2xl items-center rounded-2xl border border-slate-200 bg-white p-2 shadow-sm">
-      <Search className="ml-3 text-slate-400" size={21} />
+    <div className="flex w-full max-w-2xl items-center rounded-2xl border border-border bg-surface p-2 shadow-sm">
+      <Search className="ml-3 text-body" size={21} />
 
       <input
         type="text"
@@ -30,13 +30,13 @@ function SearchBar() {
           }
         }}
         placeholder="Search GitHub username..."
-        className="flex-1 bg-transparent px-4 py-3 text-slate-900 outline-none placeholder:text-slate-400"
+        className="flex-1 bg-transparent px-4 py-3 text-heading outline-none placeholder:text-body"
       />
 
       <button
         type="button"
         onClick={handleSearch}
-        className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition duration-200 hover:bg-blue-700"
+        className="rounded-xl bg-primary px-6 py-3 font-semibold text-white transition duration-200 hover:bg-primary-hover"
       >
         Analyze Profile
       </button>
