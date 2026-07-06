@@ -21,17 +21,17 @@ const statistics = [
 
 function StatisticsSection() {
   return (
-    <section className="mt-8 rounded-3xl border border-slate-200 bg-white px-8 py-10">
+    <section className="mt-8 rounded-3xl border border-border bg-surface px-8 py-10">
       <div className="text-center">
-        <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
+        <p className="text-sm font-semibold uppercase tracking-widest text-primary">
           Gitracker Analytics
         </p>
 
-        <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900">
+        <h2 className="mt-3 text-3xl font-bold tracking-tight text-heading">
           Powerful GitHub insights in one place
         </h2>
 
-        <p className="mx-auto mt-3 max-w-2xl text-slate-600">
+        <p className="mx-auto mt-3 max-w-2xl text-body">
           Explore profile information, repository statistics, language usage,
           and developer activity through a simple analytics experience.
         </p>
