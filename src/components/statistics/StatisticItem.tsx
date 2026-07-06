@@ -9,11 +9,11 @@ function StatisticItem({
 }: StatisticItemProps) {
   return (
     <div className="text-center">
-      <p className="text-3xl font-bold tracking-tight text-slate-900">
+      <p className="text-3xl font-bold tracking-tight text-heading">
         {value}
       </p>
 
-      <p className="mt-2 text-sm font-medium text-slate-500">
+      <p className="mt-2 text-sm font-medium text-body">
         {label}
       </p>
     </div>
