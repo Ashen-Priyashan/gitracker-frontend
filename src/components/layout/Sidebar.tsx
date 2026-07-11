@@ -17,7 +17,7 @@ function Sidebar() {
   const { username } = useParams<{ username: string }>();
 
   return (
-    <aside className="flex h-screen w-72 flex-col border-r border-border bg-surface px-6 py-8">
+    <aside className="sticky top-0 flex h-screen w-72 flex-col overflow-y-auto border-r border-border bg-surface px-6 py-8">
       <Logo />
 
       <nav className="mt-10 flex flex-col gap-2">
@@ -60,7 +60,7 @@ function Sidebar() {
         />
       </nav>
 
-      <div className="mt-auto">
+      <div className="mt-auto pt-6">
         <ApiStatusCard />
 
         <ThemeToggle />

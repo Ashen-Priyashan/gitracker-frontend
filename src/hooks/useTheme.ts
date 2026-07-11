@@ -13,12 +13,29 @@ function useTheme() {
   useEffect(() => {
     applyTheme(theme);
     saveTheme(theme);
+
+    window.dispatchEvent(new Event("theme-change"));
   }, [theme]);
 
+  useEffect(() => {
+    const handleThemeChange = () => {
+      setTheme(getStoredTheme());
+    };
+
+    window.addEventListener("theme-change", handleThemeChange);
+
+    return () => {
+      window.removeEventListener("theme-change", handleThemeChange);
+    };
+  }, []);
+
   const toggleTheme = () => {
-    setTheme((currentTheme) =>
-      currentTheme === "light" ? "dark" : "light",
-    );
+    const nextTheme: Theme =
+      theme === "light" ? "dark" : "light";
+
+    applyTheme(nextTheme);
+    saveTheme(nextTheme);
+    setTheme(nextTheme);
   };
 
   return {
