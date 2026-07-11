@@ -92,15 +92,15 @@ function RepositoryPage() {
   return (
     <div>
       <div>
-        <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
+        <p className="text-sm font-semibold uppercase tracking-widest text-primary">
           Repository Analytics
         </p>
 
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-heading">
           {username}&apos;s repositories
         </h1>
 
-        <p className="mt-3 text-slate-600">
+        <p className="mt-3 text-body">
           Explore repository activity, languages, stars, forks, and watchers.
         </p>
       </div>
@@ -114,7 +114,7 @@ function RepositoryPage() {
         />
       </div>
 
-      <p className="mt-6 text-sm text-slate-500">
+      <p className="mt-6 text-sm text-body">
         Showing {displayedRepositories.length} of {repositories.length} repositories
       </p>
 
@@ -128,8 +128,8 @@ function RepositoryPage() {
           ))}
         </div>
       ) : (
-        <div className="mt-5 rounded-3xl border border-slate-200 bg-white p-10 text-center">
-          <p className="text-slate-600">
+        <div className="mt-5 rounded-3xl border border-border bg-surface p-10 text-center">
+          <p className="text-body">
             No repositories match your search.
           </p>
         </div>
