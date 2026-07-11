@@ -22,11 +22,11 @@ function AnalyticsSummary({
     <section>
       <div className="mb-5 flex items-end justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary">
             Analytics
           </p>
 
-          <h2 className="mt-2 text-2xl font-bold text-slate-900">
+          <h2 className="mt-2 text-2xl font-bold text-heading">
             Developer overview
           </h2>
         </div>
@@ -34,7 +34,7 @@ function AnalyticsSummary({
         {username && (
           <Link
             to={`/profile/${encodeURIComponent(username)}/analytics`}
-            className="flex items-center gap-2 text-sm font-semibold text-blue-600 transition hover:text-blue-700"
+            className="flex items-center gap-2 text-sm font-semibold text-primary transition hover:opacity-80"
           >
             View analytics
             <ArrowRight size={17} />
