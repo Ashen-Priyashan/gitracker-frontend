@@ -6,6 +6,7 @@ import ProfilePage from "../pages/ProfilePage";
 import RepositoryPage from "../pages/RepositoryPage";
 import AnalyticsPage from "../pages/AnalyticsPage";
 import RecentSearchesPage from "../pages/RecentSearchesPage";
+import SettingsPage from "../pages/SettingsPage";
 
 function AppRoutes() {
   return (
@@ -25,6 +26,10 @@ function AppRoutes() {
           <Route
             path="/recent-searches"
             element={<RecentSearchesPage />}
+          />
+          <Route 
+            path="/settings" 
+            element={<SettingsPage />} 
           />
         </Route>
 
