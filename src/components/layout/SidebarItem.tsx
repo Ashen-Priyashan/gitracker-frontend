@@ -17,10 +17,10 @@ function SidebarItem({
       to={to}
       end={to === "/"}
       className={({ isActive }) =>
-        `flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition-all duration-200 hover:bg-blue-50 ${
+        `flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition-all duration-200 hover:bg-primary/10 ${
           isActive
-            ? "bg-blue-50 text-blue-600"
-            : "text-slate-600 hover:text-blue-600"
+            ? "bg-primary/10 text-primary"
+            : "text-body hover:text-primary"
         }`
       }
     >

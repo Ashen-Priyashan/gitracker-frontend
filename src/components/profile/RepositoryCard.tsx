@@ -10,17 +10,17 @@ function RepositoryCard({
   repository,
 }: RepositoryCardProps) {
   return (
-    <article className="rounded-2xl border border-slate-200 p-5">
-      <h3 className="font-semibold text-slate-900">
+    <article className="rounded-2xl border border-border bg-surface p-5">
+      <h3 className="font-semibold text-heading">
         {repository.name}
       </h3>
 
-      <p className="mt-2 min-h-12 text-sm leading-6 text-slate-600">
+      <p className="mt-2 min-h-12 text-sm leading-6 text-body">
         {repository.description ?? "No description available."}
       </p>
 
-      <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-slate-500">
-        <span className="font-medium text-blue-600">
+      <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-body">
+        <span className="font-medium text-primary">
           {repository.language ?? "Unknown"}
         </span>
 

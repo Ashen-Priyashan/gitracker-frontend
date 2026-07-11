@@ -11,19 +11,19 @@ function RecentSearchItem({
   return (
     <Link
       to={`/profile/${encodeURIComponent(username)}`}
-      className="group flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 transition duration-200 hover:-translate-y-0.5 hover:shadow-md"
+      className="group flex items-center justify-between rounded-2xl border border-border bg-surface p-5 transition duration-200 hover:-translate-y-0.5 hover:shadow-md"
     >
       <div className="flex items-center gap-4">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
           <UserRound size={21} />
         </div>
 
         <div>
-          <p className="font-semibold text-slate-900">
+          <p className="font-semibold text-heading">
             {username}
           </p>
 
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-body">
             View GitHub profile analytics
           </p>
         </div>
@@ -31,7 +31,7 @@ function RecentSearchItem({
 
       <ArrowRight
         size={19}
-        className="text-slate-400 transition group-hover:text-blue-600"
+        className="text-body transition group-hover:text-primary"
       />
     </Link>
   );

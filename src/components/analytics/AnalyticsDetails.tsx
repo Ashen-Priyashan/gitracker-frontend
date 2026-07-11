@@ -14,43 +14,43 @@ function AnalyticsDetails({
   ).toLocaleString();
 
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-8">
-      <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
+    <section className="rounded-3xl border border-border bg-surface p-8">
+      <p className="text-sm font-semibold uppercase tracking-widest text-primary">
         Analytics Details
       </p>
 
-      <h2 className="mt-2 text-2xl font-bold text-slate-900">
+      <h2 className="mt-2 text-2xl font-bold text-heading">
         Developer analytics summary
       </h2>
 
       <div className="mt-8 grid gap-6 md:grid-cols-2">
-        <div className="flex items-center gap-4 rounded-2xl border border-slate-200 p-5">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+        <div className="flex items-center gap-4 rounded-2xl border border-border bg-surface p-5">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
             <UserRound size={22} />
           </div>
 
           <div>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-body">
               GitHub User
             </p>
 
-            <p className="mt-1 font-semibold text-slate-900">
+            <p className="mt-1 font-semibold text-heading">
               @{analytics.githubUser.username}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 rounded-2xl border border-slate-200 p-5">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+        <div className="flex items-center gap-4 rounded-2xl border border-border bg-surface p-5">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
             <CalendarDays size={22} />
           </div>
 
           <div>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-body">
               Analytics Calculated
             </p>
 
-            <p className="mt-1 font-semibold text-slate-900">
+            <p className="mt-1 font-semibold text-heading">
               {calculatedDate}
             </p>
           </div>

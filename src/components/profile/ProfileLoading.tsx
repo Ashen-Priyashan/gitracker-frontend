@@ -5,11 +5,11 @@ function ProfileLoading() {
     <div className="flex min-h-[60vh] items-center justify-center">
       <div className="text-center">
         <LoaderCircle
-          className="mx-auto animate-spin text-blue-600"
+          className="mx-auto animate-spin text-primary"
           size={36}
         />
 
-        <p className="mt-4 text-slate-600">
+        <p className="mt-4 text-body">
           Analyzing GitHub profile...
         </p>
       </div>

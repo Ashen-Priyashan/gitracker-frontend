@@ -1,31 +1,61 @@
 @import "tailwindcss";
 
+@theme inline {
+  --color-background: var(--app-background);
+  --color-surface: var(--app-surface);
+  --color-heading: var(--app-heading);
+  --color-body: var(--app-body);
+  --color-border: var(--app-border);
+  --color-primary: var(--app-primary);
+  --color-primary-hover: var(--app-primary-hover);
+  --color-success: var(--app-success);
+  --color-warning: var(--app-warning);
+  --color-danger: var(--app-danger);
+}
+
 :root {
   /* Backgrounds */
-  --color-background: #f8fafc;
-  --color-surface: #ffffff;
+  --app-background: #f8fafc;
+  --app-surface: #ffffff;
 
   /* Text */
-  --color-heading: #0f172a;
-  --color-body: #64748b;
+  --app-heading: #0f172a;
+  --app-body: #64748b;
 
   /* Borders */
-  --color-border: #e2e8f0;
+  --app-border: #e2e8f0;
 
   /* Brand */
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
+  --app-primary: #2563eb;
+  --app-primary-hover: #1d4ed8;
 
   /* Status */
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-danger: #ef4444;
+  --app-success: #10b981;
+  --app-warning: #f59e0b;
+  --app-danger: #ef4444;
+}
+
+:root[data-theme="dark"] {
+  /* Backgrounds */
+  --app-background: #0f172a;
+  --app-surface: #1e293b;
+
+  /* Text */
+  --app-heading: #f8fafc;
+  --app-body: #94a3b8;
+
+  /* Borders */
+  --app-border: #334155;
+
+  /* Brand */
+  --app-primary: #3b82f6;
+  --app-primary-hover: #60a5fa;
 }
 
 body {
   margin: 0;
-  background: var(--color-background);
-  color: var(--color-heading);
+  background: var(--app-background);
+  color: var(--app-heading);
   font-family:
     Inter,
     system-ui,
