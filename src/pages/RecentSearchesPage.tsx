@@ -21,15 +21,15 @@ function RecentSearchesPage() {
     <div>
       <div className="flex items-end justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary">
             Search History
           </p>
 
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-heading">
             Recent searches
           </h1>
 
-          <p className="mt-3 text-slate-600">
+          <p className="mt-3 text-body">
             Quickly return to GitHub profiles you recently analyzed.
           </p>
         </div>
@@ -38,7 +38,7 @@ function RecentSearchesPage() {
           <button
             type="button"
             onClick={handleClearSearches}
-            className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-600 transition hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+            className="flex items-center gap-2 rounded-xl border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-body transition hover:border-danger hover:text-danger"
           >
             <Trash2 size={17} />
             Clear history
@@ -56,12 +56,12 @@ function RecentSearchesPage() {
           ))}
         </div>
       ) : (
-        <div className="mt-8 rounded-3xl border border-slate-200 bg-white p-12 text-center">
-          <h2 className="text-xl font-semibold text-slate-900">
+        <div className="mt-8 rounded-3xl border border-border bg-surface p-12 text-center">
+          <h2 className="text-xl font-semibold text-heading">
             No recent searches
           </h2>
 
-          <p className="mt-2 text-slate-600">
+          <p className="mt-2 text-body">
             Profiles you successfully analyze will appear here.
           </p>
         </div>
