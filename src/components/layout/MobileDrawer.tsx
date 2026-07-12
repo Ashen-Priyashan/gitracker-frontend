@@ -21,7 +21,7 @@ function MobileDrawer({
         className="fixed inset-0 z-40 bg-black/40 lg:hidden"
       />
 
-      <div className="fixed left-0 top-0 z-50 h-screen lg:hidden">
+      <div className="fixed left-0 top-0 z-50 h-screen w-72 lg:hidden">
         <div className="relative">
           <Sidebar />
 
