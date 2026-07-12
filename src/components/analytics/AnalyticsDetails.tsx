@@ -14,7 +14,7 @@ function AnalyticsDetails({
   ).toLocaleString();
 
   return (
-    <section className="rounded-3xl border border-border bg-surface p-8">
+    <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
       <p className="text-sm font-semibold uppercase tracking-widest text-primary">
         Analytics Details
       </p>
@@ -23,7 +23,7 @@ function AnalyticsDetails({
         Developer analytics summary
       </h2>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-2">
+      <div className="mt-8 grid gap-6 sm:grid-cols-2">
         <div className="flex items-center gap-4 rounded-2xl border border-border bg-surface p-5">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
             <UserRound size={22} />
@@ -50,7 +50,7 @@ function AnalyticsDetails({
               Analytics Calculated
             </p>
 
-            <p className="mt-1 font-semibold text-heading">
+            <p className="mt-1 break-all font-semibold text-heading">
               {calculatedDate}
             </p>
           </div>

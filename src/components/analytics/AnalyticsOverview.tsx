@@ -1,4 +1,9 @@
-import { Code2, FolderGit2, GitFork, Star } from "lucide-react";
+import {
+  Code2,
+  FolderGit2,
+  GitFork,
+  Star,
+} from "lucide-react";
 
 import type { UserAnalytics } from "../../types/profile";
 import AnalyticsCard from "../profile/AnalyticsCard";
@@ -11,7 +16,7 @@ function AnalyticsOverview({
   analytics,
 }: AnalyticsOverviewProps) {
   return (
-    <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+    <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <AnalyticsCard
         icon={FolderGit2}
         label="Repositories"

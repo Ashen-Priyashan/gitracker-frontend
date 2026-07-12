@@ -14,7 +14,7 @@ function RepositoryFilters({
   onSortChange,
 }: RepositoryFiltersProps) {
   return (
-    <div className="flex flex-col gap-4 rounded-3xl border border-border bg-surface p-5 md:flex-row">
+    <div className="flex flex-col gap-4 rounded-3xl border border-border bg-surface p-5 lg:flex-row">
       <div className="flex flex-1 items-center rounded-2xl border border-border px-4">
         <Search size={19} className="text-body" />
 
@@ -30,7 +30,7 @@ function RepositoryFilters({
       <select
         value={sort}
         onChange={(event) => onSortChange(event.target.value)}
-        className="rounded-2xl border border-border bg-surface px-4 py-3 text-heading outline-none"
+        className="w-full rounded-2xl border border-border bg-surface px-4 py-3 text-heading outline-none lg:w-56"
       >
         <option value="default">Default order</option>
         <option value="stars">Most stars</option>

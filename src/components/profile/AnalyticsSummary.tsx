@@ -20,7 +20,7 @@ function AnalyticsSummary({
 
   return (
     <section>
-      <div className="mb-5 flex items-end justify-between gap-4">
+      <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">
             Analytics

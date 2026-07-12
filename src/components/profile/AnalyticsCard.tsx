@@ -13,7 +13,7 @@ function AnalyticsCard({
 }: AnalyticsCardProps) {
   return (
     <article className="rounded-3xl border border-border bg-surface p-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm font-medium text-body">
             {label}

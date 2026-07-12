@@ -36,7 +36,7 @@ const features = [
 
 function FeatureCards() {
   return (
-    <section className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+    <section className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
       {features.map((feature) => (
         <FeatureCard
           key={feature.title}

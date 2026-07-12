@@ -15,8 +15,8 @@ function RepositoryPreview({
   const { username } = useParams<{ username: string }>();
 
   return (
-    <section className="rounded-3xl border border-border bg-surface p-8">
-      <div className="flex items-end justify-between gap-4">
+    <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">
             Repositories

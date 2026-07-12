@@ -7,15 +7,15 @@ type ProfileHeaderProps = {
 
 function ProfileHeader({ user }: ProfileHeaderProps) {
   return (
-    <section className="rounded-3xl border border-border bg-surface p-8">
-      <div className="flex items-start gap-6">
+    <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
+      <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:text-left">
         <img
           src={user.avatarUrl}
           alt={`${user.username} avatar`}
           className="h-28 w-28 rounded-3xl object-cover"
         />
 
-        <div>
+        <div className="flex-1">
           <h1 className="text-3xl font-bold text-heading">
             {user.name ?? user.username}
           </h1>
@@ -30,7 +30,7 @@ function ProfileHeader({ user }: ProfileHeaderProps) {
             </p>
           )}
 
-          <div className="mt-5 flex flex-wrap gap-5 text-sm text-body">
+          <div className="mt-5 flex flex-wrap justify-center gap-5 text-sm text-body sm:justify-start">
             {user.location && (
               <div className="flex items-center gap-2">
                 <MapPin size={17} />
@@ -40,7 +40,6 @@ function ProfileHeader({ user }: ProfileHeaderProps) {
 
             <div className="flex items-center gap-2">
               <Users size={17} />
-
               <span>
                 {user.followers.toLocaleString()} followers
               </span>
