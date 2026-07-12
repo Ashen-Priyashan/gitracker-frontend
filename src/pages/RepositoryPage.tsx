@@ -81,13 +81,9 @@ function RepositoryPage() {
     return filteredRepositories;
   }, [repositories, search, sort]);
 
-  if (loading) {
-    return <ProfileLoading />;
-  }
+  if (loading) return <ProfileLoading />;
 
-  if (error) {
-    return <ProfileError message={error} />;
-  }
+  if (error) return <ProfileError message={error} />;
 
   return (
     <div>
@@ -96,7 +92,7 @@ function RepositoryPage() {
           Repository Analytics
         </p>
 
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-heading">
+        <h1 className="mt-2 text-2xl font-bold tracking-tight text-heading sm:text-3xl">
           {username}&apos;s repositories
         </h1>
 

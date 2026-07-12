@@ -36,7 +36,7 @@ function RepositoryListCard({
         </span>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center gap-5 text-sm text-body">
+      <div className="mt-6 flex flex-wrap gap-4 text-sm text-body">
         <div className="flex items-center gap-2">
           <Star size={17} />
           <span>{repository.stars.toLocaleString()} stars</span>
