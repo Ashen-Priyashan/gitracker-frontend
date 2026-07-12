@@ -21,13 +21,13 @@ const statistics = [
 
 function StatisticsSection() {
   return (
-    <section className="mt-8 rounded-3xl border border-border bg-surface px-8 py-10">
+    <section className="mt-8 rounded-3xl border border-border bg-surface px-6 py-8 sm:px-8 sm:py-10">
       <div className="text-center">
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">
           Gitracker Analytics
         </p>
 
-        <h2 className="mt-3 text-3xl font-bold tracking-tight text-heading">
+        <h2 className="mt-3 text-2xl font-bold tracking-tight text-heading sm:text-3xl">
           Powerful GitHub insights in one place
         </h2>
 
@@ -37,7 +37,7 @@ function StatisticsSection() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-8 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
         {statistics.map((statistic) => (
           <StatisticItem
             key={statistic.value}

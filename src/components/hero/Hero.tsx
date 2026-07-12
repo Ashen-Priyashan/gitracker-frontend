@@ -3,20 +3,20 @@ import PopularSearches from "./PopularSearches";
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-border bg-surface px-10 py-16">
+    <section className="relative overflow-hidden rounded-3xl border border-border bg-surface px-6 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-16">
       <div className="relative z-10 max-w-3xl">
         <span className="inline-flex rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-primary">
           GitHub Profile Analytics
         </span>
 
-        <h1 className="mt-6 text-5xl font-bold tracking-tight text-heading">
+        <h1 className="mt-6 text-4xl font-bold tracking-tight text-heading sm:text-5xl">
           Analyze GitHub Profiles
           <span className="block text-primary">
             with Powerful Insights
           </span>
         </h1>
 
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-body">
+        <p className="mt-6 max-w-2xl text-base leading-7 text-body sm:text-lg sm:leading-8">
           Search GitHub users, explore repositories, and discover developer
           analytics through one simple dashboard.
         </p>
