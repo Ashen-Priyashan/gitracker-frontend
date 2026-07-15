@@ -4,6 +4,7 @@ import {
   GitFork,
   Star,
 } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
 
 import type { Repository } from "../../types/profile";
 
@@ -14,50 +15,59 @@ type RepositoryListCardProps = {
 function RepositoryListCard({
   repository,
 }: RepositoryListCardProps) {
+  const { username } = useParams<{ username: string }>();
+
   const updatedDate = new Date(
     repository.updatedAt,
   ).toLocaleDateString();
 
   return (
-    <article className="rounded-3xl border border-border bg-surface p-6 transition duration-200 hover:-translate-y-1 hover:shadow-md">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h2 className="text-xl font-semibold text-heading">
-            {repository.name}
-          </h2>
+    <Link
+      to={`/profile/${encodeURIComponent(
+        username ?? "",
+      )}/repositories/${encodeURIComponent(repository.name)}`}
+      className="block"
+    >
+      <article className="rounded-3xl border border-border bg-surface p-6 transition duration-200 hover:-translate-y-1 hover:shadow-md">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-semibold text-heading">
+              {repository.name}
+            </h2>
 
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-body">
-            {repository.description ?? "No description available."}
-          </p>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-body">
+              {repository.description ?? "No description available."}
+            </p>
+          </div>
+
+          <span className="rounded-xl bg-primary/10 px-3 py-1.5 text-sm font-medium text-primary">
+            {repository.language ?? "Unknown"}
+          </span>
         </div>
 
-        <span className="rounded-xl bg-primary/10 px-3 py-1.5 text-sm font-medium text-primary">
-          {repository.language ?? "Unknown"}
-        </span>
-      </div>
+        <div className="mt-6 flex flex-wrap gap-4 text-sm text-body">
+          <div className="flex items-center gap-2">
+            <Star size={17} />
+            <span>{repository.stars.toLocaleString()} stars</span>
+          </div>
 
-      <div className="mt-6 flex flex-wrap gap-4 text-sm text-body">
-        <div className="flex items-center gap-2">
-          <Star size={17} />
-          <span>{repository.stars.toLocaleString()} stars</span>
-        </div>
+          <div className="flex items-center gap-2">
+            <GitFork size={17} />
+            <span>{repository.forks.toLocaleString()} forks</span>
+          </div>
 
-        <div className="flex items-center gap-2">
-          <GitFork size={17} />
-          <span>{repository.forks.toLocaleString()} forks</span>
-        </div>
+          <div className="flex items-center gap-2">
+            <Eye size={17} />
+            <span>{repository.watchers.toLocaleString()} watchers</span>
+          </div>
 
-        <div className="flex items-center gap-2">
-          <Eye size={17} />
-          <span>{repository.watchers.toLocaleString()} watchers</span>
+          <div className="flex items-center gap-2">
+            <CalendarDays size={17} />
+            <span>Updated {updatedDate}</span>
+          </div>
         </div>
-
-        <div className="flex items-center gap-2">
-          <CalendarDays size={17} />
-          <span>Updated {updatedDate}</span>
-        </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 }
 
