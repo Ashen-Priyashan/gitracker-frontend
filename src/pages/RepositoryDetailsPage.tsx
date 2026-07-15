@@ -82,13 +82,13 @@ function RepositoryDetailsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="mx-auto max-w-7xl space-y-6">
       <div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">
           Repository
         </p>
 
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-heading">
+        <h1 className="mt-2 break-all text-3xl font-bold tracking-tight text-heading">
           {repository.name}
         </h1>
 
