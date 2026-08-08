@@ -52,11 +52,27 @@ function ReadmePreviewCard({
     };
   }, [username, repositoryName]);
 
-  const handleCopy = () => {
-    if (readme?.content) {
-      navigator.clipboard.writeText(readme.content);
+  const handleCopy = async () => {
+    if (!readme?.content) return;
+
+    const textToCopy = (() => {
+      try {
+        const bytes = Uint8Array.from(
+          atob(readme.content),
+          (c) => c.charCodeAt(0),
+        );
+        return new TextDecoder().decode(bytes);
+      } catch {
+        return readme.content;
+      }
+    })();
+
+    try {
+      await navigator.clipboard.writeText(textToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setError("Unable to copy README content.");
     }
   };
 
