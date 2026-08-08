@@ -21,7 +21,7 @@ type RepositoryDetailsCardProps = {
 };
 
 function formatSize(sizeInKb?: number): string {
-  if (!sizeInKb) return "N/A";
+  if (sizeInKb == null) return "N/A";
   if (sizeInKb < 1024) return `${sizeInKb} KB`;
   return `${(sizeInKb / 1024).toFixed(2)} MB`;
 }
