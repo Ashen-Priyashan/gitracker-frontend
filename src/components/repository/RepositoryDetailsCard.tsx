@@ -139,7 +139,7 @@ function RepositoryDetailsCard({
               <span>Default Branch</span>
             </div>
             <p className="mt-2 font-mono font-bold text-heading text-lg">
-              {repository.defaultBranch ?? "main"}
+              {repository.defaultBranch ?? "N/A"}
             </p>
           </div>
 
