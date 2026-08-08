@@ -16,8 +16,21 @@ export type Repository = {
   forks: number;
   watchers: number;
   language: string | null;
+  defaultBranch?: string;
+  openIssues?: number;
+  licenseName?: string | null;
+  topics?: string[];
+  htmlUrl?: string | null;
+  size?: number;
+  archived?: boolean;
   createdAt: string;
   updatedAt: string;
+};
+
+export type ReadmeResponse = {
+  content: string | null;
+  htmlUrl: string | null;
+  exists: boolean;
 };
 
 export type AnalyticsGitHubUser = {
