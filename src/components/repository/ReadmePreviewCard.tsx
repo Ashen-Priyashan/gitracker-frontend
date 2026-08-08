@@ -136,7 +136,17 @@ function ReadmePreviewCard({
               }`}
             >
               <pre className="whitespace-pre-wrap font-mono break-words">
-                {readme.content}
+                {(() => {
+                  try {
+                    const bytes = Uint8Array.from(
+                      atob(readme.content),
+                      (c) => c.charCodeAt(0),
+                    );
+                    return new TextDecoder().decode(bytes);
+                  } catch {
+                    return readme.content;
+                  }
+                })()}
               </pre>
 
               {!isExpanded && (
