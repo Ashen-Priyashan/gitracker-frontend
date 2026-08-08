@@ -149,7 +149,7 @@ function RepositoryDetailsCard({
               <span>Open Issues</span>
             </div>
             <p className="mt-2 font-bold text-heading text-lg">
-              {(repository.openIssues ?? 0).toLocaleString()}
+              {repository.openIssues != null ? repository.openIssues.toLocaleString() : "N/A"}
             </p>
           </div>
 
