@@ -99,6 +99,7 @@ function RepositoryDetailsPage() {
 
       <RepositoryDetailsCard
         repository={repository}
+        username={username!}
       />
     </div>
   );
