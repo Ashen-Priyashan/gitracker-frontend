@@ -1,5 +1,5 @@
 import apiClient from "../api/apiClient";
-import type { Repository } from "../types/profile";
+import type { ReadmeResponse, Repository } from "../types/profile";
 
 const getRepositories = async (
   username: string,
@@ -11,4 +11,15 @@ const getRepositories = async (
   return response.data;
 };
 
-export { getRepositories };
+const getRepositoryReadme = async (
+  username: string,
+  repoName: string,
+): Promise<ReadmeResponse> => {
+  const response = await apiClient.get<ReadmeResponse>(
+    `/api/users/${username}/repositories/${encodeURIComponent(repoName)}/readme`,
+  );
+
+  return response.data;
+};
+
+export { getRepositories, getRepositoryReadme };
