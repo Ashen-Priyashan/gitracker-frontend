@@ -2,7 +2,7 @@ import Skeleton from "../loading/Skeleton";
 
 function ProfileLoading() {
   return (
-    <div className="space-y-6" aria-busy="true" aria-label="Loading GitHub profile">
+    <div className="space-y-6" role="status" aria-live="polite" aria-busy="true" aria-label="Loading GitHub profile">
       <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
           <Skeleton className="h-28 w-28 rounded-3xl" />
