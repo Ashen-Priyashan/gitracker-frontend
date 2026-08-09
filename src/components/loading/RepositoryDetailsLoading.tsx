@@ -2,7 +2,7 @@ import Skeleton from "./Skeleton";
 
 function RepositoryDetailsLoading() {
   return (
-    <div className="mx-auto max-w-7xl space-y-6" aria-busy="true" aria-label="Loading repository details">
+    <div className="mx-auto max-w-7xl space-y-6" role="status" aria-live="polite" aria-busy="true" aria-label="Loading repository details">
       <div className="space-y-3">
         <Skeleton className="h-4 w-28" />
         <Skeleton className="h-9 w-80 max-w-full" />
