@@ -2,7 +2,7 @@ import Skeleton from "./Skeleton";
 
 function AnalyticsLoading() {
   return (
-    <div className="space-y-6" aria-busy="true" aria-label="Loading analytics">
+    <div className="space-y-6" role="status" aria-live="polite" aria-busy="true" aria-label="Loading analytics">
       <div className="space-y-3">
         <Skeleton className="h-4 w-44" />
         <Skeleton className="h-9 w-72 max-w-full" />
