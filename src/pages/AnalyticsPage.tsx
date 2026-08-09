@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import AnalyticsDetails from "../components/analytics/AnalyticsDetails";
 import AnalyticsOverview from "../components/analytics/AnalyticsOverview";
 import ProfileError from "../components/profile/ProfileError";
-import ProfileLoading from "../components/profile/ProfileLoading";
+import AnalyticsLoading from "../components/loading/AnalyticsLoading";
 import { getUserAnalytics } from "../services/analyticsService";
 import type { ApiError, UserAnalytics } from "../types/profile";
 
@@ -49,7 +49,7 @@ function AnalyticsPage() {
   }, [username]);
 
   if (loading) {
-    return <ProfileLoading />;
+    return <AnalyticsLoading />;
   }
 
   if (error) {

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ProfileError from "../components/profile/ProfileError";
-import ProfileLoading from "../components/profile/ProfileLoading";
+import RepositoryListLoading from "../components/loading/RepositoryListLoading";
 import RepositoryFilters from "../components/repository/RepositoryFilters";
 import RepositoryListCard from "../components/repository/RepositoryListCard";
 import { getRepositories } from "../services/repositoryService";
@@ -81,7 +81,7 @@ function RepositoryPage() {
     return filteredRepositories;
   }, [repositories, search, sort]);
 
-  if (loading) return <ProfileLoading />;
+  if (loading) return <RepositoryListLoading />;
 
   if (error) return <ProfileError message={error} />;
 
