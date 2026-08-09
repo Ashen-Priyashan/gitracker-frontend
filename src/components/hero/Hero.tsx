@@ -1,0 +1,37 @@
+import SearchBar from "./SearchBar";
+import PopularSearches from "./PopularSearches";
+
+function Hero() {
+  return (
+    <section className="relative overflow-hidden rounded-3xl border border-border bg-surface px-6 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-16">
+      <div className="relative z-10 max-w-3xl">
+        <span className="inline-flex rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-primary">
+          GitHub Profile Analytics
+        </span>
+
+        <h1 className="mt-6 text-4xl font-bold tracking-tight text-heading sm:text-5xl">
+          Analyze GitHub Profiles
+          <span className="block text-primary">
+            with Powerful Insights
+          </span>
+        </h1>
+
+        <p className="mt-6 max-w-2xl text-base leading-7 text-body sm:text-lg sm:leading-8">
+          Search GitHub users, explore repositories, and discover developer
+          analytics through one simple dashboard.
+        </p>
+
+        <div className="mt-8">
+          <SearchBar />
+          <PopularSearches />
+        </div>
+      </div>
+
+      <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
+
+      <div className="absolute -bottom-32 right-40 h-72 w-72 rounded-full bg-border/40 blur-3xl" />
+    </section>
+  );
+}
+
+export default Hero;
