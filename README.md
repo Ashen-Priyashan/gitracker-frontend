@@ -1,75 +1,117 @@
-# React + TypeScript + Vite
+# GitTracker Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+GitTracker is a responsive React application for exploring a GitHub user's profile, repositories, and developer analytics. It consumes the GitTracker Spring Boot API and presents the results in a clean, theme-aware dashboard.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Search for a GitHub profile from the home page
+- View profile details, follower counts, language insights, and repository previews
+- Browse, search, and sort a user's repositories
+- Inspect repository metadata, statistics, topics, and README content
+- View aggregate developer analytics, including repositories, stars, forks, and most-used language
+- Save recent searches in the browser
+- Switch between light and dark themes
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19 and TypeScript
+- Vite
+- Tailwind CSS 4
+- React Router
+- Axios
+- Lucide React icons
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js 20 or later
+- npm
+- The GitTracker backend running locally (default: `http://localhost:8080`)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The backend uses PostgreSQL and Redis. From the backend project, start its Docker services before launching the API:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+docker compose up -d
+./mvnw spring-boot:run
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+On Windows, use `mvnw.cmd spring-boot:run` if needed.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Getting Started
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Install dependencies:
 
+   ```bash
+   npm install
+   ```
+
+2. Configure the API URL in `.env`:
+
+   ```env
+   VITE_API_BASE_URL=http://localhost:8080
+   ```
+
+   Copy `.env.example` if you need to create the file.
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open the URL Vite prints in the terminal, usually `http://localhost:5173`.
+
+## Available Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Starts the Vite development server with hot module replacement. |
+| `npm run build` | Type-checks the application and creates a production build. |
+| `npm run lint` | Runs ESLint across the project. |
+| `npm run preview` | Serves the production build locally. |
+
+## Routes
+
+| Route | Purpose |
+| --- | --- |
+| `/` | Search for a GitHub user. |
+| `/profile/:username` | View a profile summary and repository preview. |
+| `/profile/:username/repositories` | Browse and filter repositories. |
+| `/profile/:username/repositories/:repositoryName` | View repository details and README content. |
+| `/profile/:username/analytics` | View developer analytics. |
+| `/recent-searches` | Revisit recently searched profiles. |
+| `/settings` | Manage display settings, including theme. |
+
+## API Endpoints Used
+
+The frontend expects these endpoints from the backend:
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /api/profile/:username` | Profile summary and analytics. |
+| `GET /api/users/:username/repositories` | User repositories. |
+| `GET /api/users/:username/repositories/:repositoryName/readme` | Repository README. |
+| `GET /api/analytics/:username` | Developer analytics. |
+
+## Project Structure
+
+```text
+src/
+├── api/          # Axios client configuration
+├── components/   # Feature and shared UI components
+├── hooks/        # Reusable React hooks
+├── layouts/      # Application shell and navigation
+├── pages/        # Route-level screens
+├── routes/       # Route definitions
+├── services/     # Backend API calls
+├── types/        # TypeScript models
+└── utils/        # Theme and recent-search helpers
+```
+
+## Verification
+
+Before opening a pull request, run:
+
+```bash
+npm run lint
+npm run build
 ```
