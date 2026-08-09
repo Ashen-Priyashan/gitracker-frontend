@@ -23,7 +23,7 @@ function RepositoryCardSkeleton() {
 
 function RepositoryListLoading() {
   return (
-    <div aria-busy="true" aria-label="Loading repositories">
+    <div role="status" aria-live="polite" aria-busy="true" aria-label="Loading repositories">
       <div className="space-y-3">
         <Skeleton className="h-4 w-44" />
         <Skeleton className="h-9 w-72 max-w-full" />
