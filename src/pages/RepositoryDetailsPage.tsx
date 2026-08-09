@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import RepositoryDetailsCard from "../components/repository/RepositoryDetailsCard";
 import ProfileError from "../components/profile/ProfileError";
-import ProfileLoading from "../components/profile/ProfileLoading";
+import RepositoryDetailsLoading from "../components/loading/RepositoryDetailsLoading";
 import { getRepositories } from "../services/repositoryService";
 import type {
   ApiError,
@@ -68,7 +68,7 @@ function RepositoryDetailsPage() {
   }, [repositories, repositoryName]);
 
   if (loading) {
-    return <ProfileLoading />;
+    return <RepositoryDetailsLoading />;
   }
 
   if (error) {
