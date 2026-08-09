@@ -16,7 +16,10 @@ function RepositoryDetailsLoading() {
               <Skeleton className="h-5 w-full max-w-3xl" />
               <Skeleton className="h-5 w-3/4" />
             </div>
-            <div className="flex gap-3"><Skeleton className="h-10 w-24" /><Skeleton className="h-10 w-28" /></div>
+            <div className="flex gap-3">
+              <Skeleton className="h-10 w-24" />
+              <Skeleton className="h-10 w-28" />
+            </div>
           </div>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
