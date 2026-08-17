@@ -1,9 +1,35 @@
-import { Info, Moon, Settings } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { CheckCircle2, Info, Moon, Settings, XCircle } from "lucide-react";
 
+import GitHubConnectionCard from "../components/profile/GitHubConnectionCard";
 import useTheme from "../hooks/useTheme";
 
 function SettingsPage() {
   const { theme } = useTheme();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
+
+  useEffect(() => {
+    const connected = searchParams.get("connected");
+    const errorParam = searchParams.get("error");
+
+    if (connected === "true") {
+      setNotification({
+        type: "success",
+        message: "Successfully connected your GitHub account!",
+      });
+      searchParams.delete("connected");
+      setSearchParams(searchParams, { replace: true });
+    } else if (errorParam) {
+      setNotification({
+        type: "error",
+        message: `GitHub authorization failed (${errorParam}). Please try again.`,
+      });
+      searchParams.delete("error");
+      setSearchParams(searchParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   return (
     <div className="space-y-6">
@@ -17,10 +43,34 @@ function SettingsPage() {
         </h1>
 
         <p className="mt-3 max-w-2xl text-body">
-          Customize your GitTracker experience and view application
+          Customize your GitTracker experience, manage GitHub account permissions, and view application
           information.
         </p>
       </div>
+
+      {notification && (
+        <div
+          className={`flex items-center justify-between rounded-2xl border p-4 text-sm font-medium ${
+            notification.type === "success"
+              ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-500"
+              : "border-red-500/20 bg-red-500/10 text-red-500"
+          }`}
+        >
+          <div className="flex items-center gap-3">
+            {notification.type === "success" ? <CheckCircle2 size={20} /> : <XCircle size={20} />}
+            <span>{notification.message}</span>
+          </div>
+
+          <button
+            onClick={() => setNotification(null)}
+            className="text-xs uppercase tracking-wider underline hover:opacity-80"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
+
+      <GitHubConnectionCard />
 
       <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
