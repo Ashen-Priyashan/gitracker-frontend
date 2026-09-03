@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { ArrowRight, FolderGit2, Lock, Mail, ShieldAlert } from "lucide-react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 export function LoginPage() {
   const { login } = useAuth();
@@ -28,9 +29,12 @@ export function LoginPage() {
       } else {
         navigate("/");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Login failed:", err);
-      const msg = err?.response?.data?.message || "Invalid email or password. Please try again.";
+      let msg = "Invalid email or password. Please try again.";
+      if (axios.isAxiosError<{ message?: string }>(err) && err.response?.data?.message) {
+        msg = err.response.data.message;
+      }
       setError(msg);
     } finally {
       setLoading(false);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { CheckCircle2, FolderGit2, LogOut, ShieldAlert, ShieldCheck } from "lucide-react";
 import type { GitHubConnectionStatus } from "../../services/githubAuthService";
 import { githubAuthService } from "../../services/githubAuthService";
@@ -18,7 +18,7 @@ export function GitHubConnectionCard({ onStatusChange }: GitHubConnectionCardPro
   const [actionLoading, setActionLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchStatus = async () => {
+  const fetchStatus = useCallback(async () => {
     try {
       setLoading(true);
       const data = await githubAuthService.getConnectionStatus();
@@ -30,11 +30,35 @@ export function GitHubConnectionCard({ onStatusChange }: GitHubConnectionCardPro
     } finally {
       setLoading(false);
     }
-  };
+  }, [onStatusChange]);
 
   useEffect(() => {
-    fetchStatus();
-  }, []);
+    let isMounted = true;
+    const loadStatus = async () => {
+      try {
+        const data = await githubAuthService.getConnectionStatus();
+        if (isMounted) {
+          setStatus(data);
+          if (onStatusChange) onStatusChange(data);
+        }
+      } catch (err) {
+        if (isMounted) {
+          console.error("Failed to fetch GitHub connection status:", err);
+          setError("Unable to retrieve GitHub connection status.");
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadStatus();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [onStatusChange]);
 
   const handleConnect = async () => {
     try {

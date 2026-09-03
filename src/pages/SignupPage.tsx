@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { ArrowRight, FolderGit2, Lock, Mail, ShieldAlert, User } from "lucide-react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 export function SignupPage() {
   const { signUp } = useAuth();
@@ -35,9 +36,12 @@ export function SignupPage() {
       setError(null);
       await signUp({ name, email, password, confirmPassword });
       navigate("/connect-github");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Sign up failed:", err);
-      const msg = err?.response?.data?.message || "Failed to create account. Please try again.";
+      let msg = "Failed to create account. Please try again.";
+      if (axios.isAxiosError<{ message?: string }>(err) && err.response?.data?.message) {
+        msg = err.response.data.message;
+      }
       setError(msg);
     } finally {
       setLoading(false);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CheckCircle2, FolderGit2, LogOut, ShieldCheck } from "lucide-react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 import { githubAuthService } from "../services/githubAuthService";
 
 export function ConnectGithubPage() {

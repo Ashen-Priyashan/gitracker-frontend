@@ -8,26 +8,30 @@ import useTheme from "../hooks/useTheme";
 function SettingsPage() {
   const { theme } = useTheme();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
-
-  useEffect(() => {
+  const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(() => {
     const connected = searchParams.get("connected");
     const errorParam = searchParams.get("error");
-
     if (connected === "true") {
-      setNotification({
+      return {
         type: "success",
         message: "Successfully connected your GitHub account!",
-      });
-      searchParams.delete("connected");
-      setSearchParams(searchParams, { replace: true });
-    } else if (errorParam) {
-      setNotification({
+      };
+    }
+    if (errorParam) {
+      return {
         type: "error",
         message: `GitHub authorization failed (${errorParam}). Please try again.`,
-      });
-      searchParams.delete("error");
-      setSearchParams(searchParams, { replace: true });
+      };
+    }
+    return null;
+  });
+
+  useEffect(() => {
+    if (searchParams.has("connected") || searchParams.has("error")) {
+      const nextParams = new URLSearchParams(searchParams);
+      nextParams.delete("connected");
+      nextParams.delete("error");
+      setSearchParams(nextParams, { replace: true });
     }
   }, [searchParams, setSearchParams]);
 

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import type {
   AuthStatusResponse,
   LoginRequestData,
@@ -6,24 +6,13 @@ import type {
   UserAuth,
 } from "../services/authService";
 import { authService } from "../services/authService";
-
-interface AuthContextType {
-  user: UserAuth | null;
-  loading: boolean;
-  githubConnected: boolean;
-  login: (data: LoginRequestData) => Promise<UserAuth>;
-  signUp: (data: SignUpRequestData) => Promise<UserAuth>;
-  logout: () => Promise<void>;
-  refreshUser: () => Promise<UserAuth | null>;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import { AuthContext } from "./authContextValue";
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<UserAuth | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const refreshUser = async (): Promise<UserAuth | null> => {
+  const refreshUser = useCallback(async (): Promise<UserAuth | null> => {
     try {
       const data: AuthStatusResponse = await authService.getCurrentUser();
       if (data.authenticated && data.user) {
@@ -40,10 +29,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    refreshUser();
+    let isMounted = true;
+    const initializeAuth = async () => {
+      try {
+        const data: AuthStatusResponse = await authService.getCurrentUser();
+        if (isMounted) {
+          if (data.authenticated && data.user) {
+            setUser(data.user);
+          } else {
+            setUser(null);
+          }
+        }
+      } catch (err) {
+        if (isMounted) {
+          console.error("Failed to check auth status:", err);
+          setUser(null);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    initializeAuth();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const login = async (data: LoginRequestData): Promise<UserAuth> => {
@@ -80,12 +96,4 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = (): AuthContextType => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
 };

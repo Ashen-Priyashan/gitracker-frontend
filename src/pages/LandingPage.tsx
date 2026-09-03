@@ -3,7 +3,7 @@ import { ArrowRight, FolderGit2, ShieldCheck, Sparkles, UserPlus } from "lucide-
 import FeatureCards from "../components/cards/FeatureCards";
 import Hero from "../components/hero/Hero";
 import StatisticsSection from "../components/statistics/StatisticsSection";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 export function LandingPage() {
   const { user, githubConnected } = useAuth();
