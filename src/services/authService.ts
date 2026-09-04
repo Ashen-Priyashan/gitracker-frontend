@@ -42,6 +42,11 @@ export const authService = {
     await apiClient.post("/api/auth/logout");
   },
 
+  linkGithub: async (username: string): Promise<UserAuth> => {
+    const response = await apiClient.post<UserAuth>("/api/auth/link-github", { username });
+    return response.data;
+  },
+
   getCurrentUser: async (): Promise<AuthStatusResponse> => {
     const response = await apiClient.get<AuthStatusResponse>("/api/auth/me");
     return response.data;

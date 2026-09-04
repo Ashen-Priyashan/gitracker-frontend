@@ -79,6 +79,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
   };
 
+  const linkGithub = async (username: string): Promise<UserAuth> => {
+    const updatedUser = await authService.linkGithub(username);
+    setUser(updatedUser);
+    return updatedUser;
+  };
+
   const githubConnected = Boolean(user?.githubConnected);
 
   return (
@@ -90,6 +96,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login,
         signUp,
         logout,
+        linkGithub,
         refreshUser,
       }}
     >

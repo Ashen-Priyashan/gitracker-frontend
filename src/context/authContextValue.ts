@@ -12,6 +12,7 @@ export interface AuthContextType {
   login: (data: LoginRequestData) => Promise<UserAuth>;
   signUp: (data: SignUpRequestData) => Promise<UserAuth>;
   logout: () => Promise<void>;
+  linkGithub: (username: string) => Promise<UserAuth>;
   refreshUser: () => Promise<UserAuth | null>;
 }
 

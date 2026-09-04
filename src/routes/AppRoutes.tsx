@@ -45,11 +45,11 @@ function AppRoutes() {
               }
             />
 
-            {/* Fully Protected Routes (Requires Gitracker user + Mandatory GitHub Connection) */}
+            {/* Protected Routes (Requires Gitracker user authentication) */}
             <Route
               path="/profile/:username"
               element={
-                <ProtectedRoute requireGithub={true}>
+                <ProtectedRoute requireGithub={false}>
                   <ProfilePage />
                 </ProtectedRoute>
               }
@@ -58,7 +58,7 @@ function AppRoutes() {
             <Route
               path="/profile/:username/repositories"
               element={
-                <ProtectedRoute requireGithub={true}>
+                <ProtectedRoute requireGithub={false}>
                   <RepositoryPage />
                 </ProtectedRoute>
               }
@@ -67,7 +67,7 @@ function AppRoutes() {
             <Route
               path="/profile/:username/repositories/:repositoryName"
               element={
-                <ProtectedRoute requireGithub={true}>
+                <ProtectedRoute requireGithub={false}>
                   <RepositoryDetailsPage />
                 </ProtectedRoute>
               }
@@ -76,7 +76,7 @@ function AppRoutes() {
             <Route
               path="/profile/:username/analytics"
               element={
-                <ProtectedRoute requireGithub={true}>
+                <ProtectedRoute requireGithub={false}>
                   <AnalyticsPage />
                 </ProtectedRoute>
               }
@@ -85,7 +85,7 @@ function AppRoutes() {
             <Route
               path="/recent-searches"
               element={
-                <ProtectedRoute requireGithub={true}>
+                <ProtectedRoute requireGithub={false}>
                   <RecentSearchesPage />
                 </ProtectedRoute>
               }
