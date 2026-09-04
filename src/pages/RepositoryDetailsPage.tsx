@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import RepositoryDetailsCard from "../components/repository/RepositoryDetailsCard";
 import ProfileError from "../components/profile/ProfileError";
 import RepositoryDetailsLoading from "../components/loading/RepositoryDetailsLoading";
-import { getRepositories } from "../services/repositoryService";
+import { getRepositoryDetails } from "../services/repositoryService";
 import type {
   ApiError,
   Repository,
@@ -17,26 +17,35 @@ function RepositoryDetailsPage() {
     repositoryName: string;
   }>();
 
-  const [repositories, setRepositories] = useState<Repository[]>([]);
+  const [repository, setRepository] = useState<Repository | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchRepositories = async () => {
-      if (!username) {
-        setError("GitHub username is required.");
-        setLoading(false);
+    let isMounted = true;
+
+    const fetchRepository = async () => {
+      if (!username || !repositoryName) {
+        if (isMounted) {
+          setError("GitHub username and repository name are required.");
+          setLoading(false);
+        }
         return;
       }
 
       try {
-        setLoading(true);
-        setError(null);
+        if (isMounted) {
+          setLoading(true);
+          setError(null);
+        }
 
-        const data = await getRepositories(username);
+        const data = await getRepositoryDetails(username, repositoryName);
 
-        setRepositories(data);
+        if (isMounted) {
+          setRepository(data);
+        }
       } catch (requestError) {
+        if (!isMounted) return;
         if (axios.isAxiosError<ApiError>(requestError)) {
           setError(
             requestError.response?.data.message ??
@@ -46,26 +55,18 @@ function RepositoryDetailsPage() {
           setError("An unexpected error occurred.");
         }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
-    fetchRepositories();
-  }, [username]);
+    fetchRepository();
 
-  const repository = useMemo(() => {
-    if (!repositoryName) {
-      return null;
-    }
-
-    return (
-      repositories.find(
-        (item) =>
-          item.name.toLowerCase() ===
-          decodeURIComponent(repositoryName).toLowerCase(),
-      ) ?? null
-    );
-  }, [repositories, repositoryName]);
+    return () => {
+      isMounted = false;
+    };
+  }, [username, repositoryName]);
 
   if (loading) {
     return <RepositoryDetailsLoading />;
