@@ -55,17 +55,7 @@ function ReadmePreviewCard({
   const handleCopy = async () => {
     if (!readme?.content) return;
 
-    const textToCopy = (() => {
-      try {
-        const bytes = Uint8Array.from(
-          atob(readme.content),
-          (c) => c.charCodeAt(0),
-        );
-        return new TextDecoder().decode(bytes);
-      } catch {
-        return readme.content;
-      }
-    })();
+    const textToCopy = readme.content;
 
     try {
       await navigator.clipboard.writeText(textToCopy);
@@ -152,17 +142,7 @@ function ReadmePreviewCard({
               }`}
             >
               <pre className="whitespace-pre-wrap font-mono break-words">
-                {(() => {
-                  try {
-                    const bytes = Uint8Array.from(
-                      atob(readme.content),
-                      (c) => c.charCodeAt(0),
-                    );
-                    return new TextDecoder().decode(bytes);
-                  } catch {
-                    return readme.content;
-                  }
-                })()}
+                {readme.content}
               </pre>
 
               {!isExpanded && (
