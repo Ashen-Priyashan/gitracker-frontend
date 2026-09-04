@@ -4,11 +4,17 @@ on:
   push:
     branches:
       - develop
+      - main
+      - "feat/**"
       - "feature/**"
+      - "fix/**"
+      - "chore/**"
+      - "test/**"
 
   pull_request:
     branches:
       - develop
+      - main
 
 jobs:
   build:
@@ -29,6 +35,9 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
+
+      - name: Run unit tests
+        run: npm run test
 
       - name: Build application
         run: npm run build
