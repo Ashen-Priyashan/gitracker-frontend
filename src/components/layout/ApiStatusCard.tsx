@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Activity, AlertCircle, CheckCircle2 } from "lucide-react";
 import apiClient from "../../api/apiClient";
-import { useAuth } from "../../context/AuthContext";
+import useAuth from "../../hooks/useAuth";
 
 function ApiStatusCard() {
   const { user } = useAuth();
