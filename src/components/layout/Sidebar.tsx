@@ -20,6 +20,7 @@ import ThemeToggle from "./ThemeToggle";
 function Sidebar() {
   const { username } = useParams<{ username: string }>();
   const { user, logout } = useAuth();
+  const activeUsername = username || user?.githubUsername;
 
   return (
     <aside className="sticky top-0 flex h-screen w-72 flex-col overflow-y-auto border-r border-border bg-surface px-6 py-8">
@@ -28,26 +29,24 @@ function Sidebar() {
       <nav className="mt-10 flex flex-col gap-2">
         <SidebarItem icon={House} label="Home" to="/" />
 
-        
-
-        {username && (
+        {activeUsername && (
           <>
             <SidebarItem
               icon={User}
               label="Profile"
-              to={`/profile/${encodeURIComponent(username)}`}
+              to={`/profile/${encodeURIComponent(activeUsername)}`}
             />
 
             <SidebarItem
               icon={FolderGit2}
               label="Repositories"
-              to={`/profile/${encodeURIComponent(username)}/repositories`}
+              to={`/profile/${encodeURIComponent(activeUsername)}/repositories`}
             />
 
             <SidebarItem
               icon={ChartColumn}
               label="Analytics"
-              to={`/profile/${encodeURIComponent(username)}/analytics`}
+              to={`/profile/${encodeURIComponent(activeUsername)}/analytics`}
             />
           </>
         )}
