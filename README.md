@@ -66,8 +66,18 @@ On Windows, use `mvnw.cmd spring-boot:run` if needed.
 | --- | --- |
 | `npm run dev` | Starts the Vite development server with hot module replacement. |
 | `npm run build` | Type-checks the application and creates a production build. |
+| `npm run test` | Runs the Vitest test suite with React Testing Library. |
 | `npm run lint` | Runs ESLint across the project. |
 | `npm run preview` | Serves the production build locally. |
+
+## Production Docker
+
+Build and run the frontend production container:
+
+```bash
+docker build -t gitracker-frontend .
+docker run -p 5173:80 gitracker-frontend
+```
 
 ## Routes
 
@@ -79,7 +89,7 @@ On Windows, use `mvnw.cmd spring-boot:run` if needed.
 | `/profile/:username/repositories/:repositoryName` | View repository details and README content. |
 | `/profile/:username/analytics` | View developer analytics. |
 | `/recent-searches` | Revisit recently searched profiles. |
-| `/settings` | Manage display settings, including theme. |
+| `/settings` | Manage display settings, including theme and GitHub account connection. |
 
 ## API Endpoints Used
 
@@ -90,7 +100,10 @@ The frontend expects these endpoints from the backend:
 | `GET /api/profile/:username` | Profile summary and analytics. |
 | `GET /api/users/:username/repositories` | User repositories. |
 | `GET /api/users/:username/repositories/:repositoryName/readme` | Repository README. |
+| `GET /api/repositories/:username/:repositoryName` | Single repository details. |
 | `GET /api/analytics/:username` | Developer analytics. |
+| `GET /api/health` | Live backend API status check. |
+| `GET /api/github/status` | GitHub connection status. |
 
 ## Project Structure
 
@@ -98,13 +111,15 @@ The frontend expects these endpoints from the backend:
 src/
 ├── api/          # Axios client configuration
 ├── components/   # Feature and shared UI components
+├── context/      # Authentication context
 ├── hooks/        # Reusable React hooks
 ├── layouts/      # Application shell and navigation
 ├── pages/        # Route-level screens
 ├── routes/       # Route definitions
 ├── services/     # Backend API calls
+├── test/         # Vitest setup and configurations
 ├── types/        # TypeScript models
-└── utils/        # Theme and recent-search helpers
+└── utils/        # Theme, recent-search, and date helpers
 ```
 
 ## Verification
@@ -112,6 +127,7 @@ src/
 Before opening a pull request, run:
 
 ```bash
+npm run test
 npm run lint
 npm run build
 ```
