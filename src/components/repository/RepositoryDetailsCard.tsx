@@ -14,6 +14,7 @@ import {
 
 import type { Repository } from "../../types/profile";
 import ReadmePreviewCard from "./ReadmePreviewCard";
+import RepositoryActivity from "./RepositoryActivity";
 
 type RepositoryDetailsCardProps = {
   repository: Repository;
@@ -207,6 +208,13 @@ function RepositoryDetailsCard({
           </div>
         </div>
       )}
+
+      {/* Repository Activity (Branch Selector & Commit History) */}
+      <RepositoryActivity
+        username={username}
+        repositoryName={repository.name}
+        defaultBranch={repository.defaultBranch}
+      />
 
       {/* README Preview Card Component */}
       <ReadmePreviewCard
