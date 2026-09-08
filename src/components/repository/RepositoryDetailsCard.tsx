@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   CalendarDays,
   Eye,
@@ -15,6 +16,9 @@ import {
 import type { Repository } from "../../types/profile";
 import ReadmePreviewCard from "./ReadmePreviewCard";
 import RepositoryActivity from "./RepositoryActivity";
+import RepositoryIntelligenceNav, { type RepositoryTab } from "./RepositoryIntelligenceNav";
+import ContributorAnalytics from "./ContributorAnalytics";
+import CommitActivityTrends from "./CommitActivityTrends";
 
 type RepositoryDetailsCardProps = {
   repository: Repository;
@@ -31,6 +35,7 @@ function RepositoryDetailsCard({
   repository,
   username,
 }: RepositoryDetailsCardProps) {
+  const [activeTab, setActiveTab] = useState<RepositoryTab>("overview");
   const createdDate = new Date(repository.createdAt).toLocaleDateString();
   const updatedDate = new Date(repository.updatedAt).toLocaleDateString();
 
@@ -80,147 +85,174 @@ function RepositoryDetailsCard({
         </div>
       </div>
 
-      {/* Main Stats Grid */}
-      <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-        <div className="rounded-3xl border border-border bg-surface p-6">
-          <div className="flex items-center gap-2 text-primary">
-            <Star size={20} />
-            <span className="font-medium">Stars</span>
-          </div>
+      {/* Repository Intelligence Navigation */}
+      <RepositoryIntelligenceNav
+        activeTab={activeTab}
+        onSelectTab={setActiveTab}
+      />
 
-          <p className="mt-4 text-3xl font-bold text-heading">
-            {repository.stars.toLocaleString()}
-          </p>
-        </div>
+      {/* Tab 1: Overview & Commits (Default Experience) */}
+      {activeTab === "overview" && (
+        <>
+          {/* Main Stats Grid */}
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="rounded-3xl border border-border bg-surface p-6">
+              <div className="flex items-center gap-2 text-primary">
+                <Star size={20} />
+                <span className="font-medium">Stars</span>
+              </div>
 
-        <div className="rounded-3xl border border-border bg-surface p-6">
-          <div className="flex items-center gap-2 text-primary">
-            <GitFork size={20} />
-            <span className="font-medium">Forks</span>
-          </div>
-
-          <p className="mt-4 text-3xl font-bold text-heading">
-            {repository.forks.toLocaleString()}
-          </p>
-        </div>
-
-        <div className="rounded-3xl border border-border bg-surface p-6">
-          <div className="flex items-center gap-2 text-primary">
-            <Eye size={20} />
-            <span className="font-medium">Watchers</span>
-          </div>
-
-          <p className="mt-4 text-3xl font-bold text-heading">
-            {repository.watchers.toLocaleString()}
-          </p>
-        </div>
-
-        <div className="rounded-3xl border border-border bg-surface p-6">
-          <div className="flex items-center gap-2 text-primary">
-            <CalendarDays size={20} />
-            <span className="font-medium">Language</span>
-          </div>
-
-          <p className="mt-4 text-xl font-bold text-heading">
-            {repository.language ?? "Unknown"}
-          </p>
-        </div>
-      </div>
-
-      {/* Repository Insights & Metadata Grid */}
-      <div className="rounded-3xl border border-border bg-surface p-8">
-        <h2 className="text-xl font-bold text-heading">
-          Repository Metadata & Insights
-        </h2>
-
-        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-2xl border border-border/50 bg-black/10 p-4">
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-body">
-              <GitBranch size={14} className="text-primary" />
-              <span>Default Branch</span>
+              <p className="mt-4 text-3xl font-bold text-heading">
+                {repository.stars.toLocaleString()}
+              </p>
             </div>
-            <p className="mt-2 font-mono font-bold text-heading text-lg">
-              {repository.defaultBranch ?? "N/A"}
-            </p>
-          </div>
 
-          <div className="rounded-2xl border border-border/50 bg-black/10 p-4">
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-body">
-              <CircleDot size={14} className="text-primary" />
-              <span>Open Issues</span>
+            <div className="rounded-3xl border border-border bg-surface p-6">
+              <div className="flex items-center gap-2 text-primary">
+                <GitFork size={20} />
+                <span className="font-medium">Forks</span>
+              </div>
+
+              <p className="mt-4 text-3xl font-bold text-heading">
+                {repository.forks.toLocaleString()}
+              </p>
             </div>
-            <p className="mt-2 font-bold text-heading text-lg">
-              {repository.openIssues != null ? repository.openIssues.toLocaleString() : "N/A"}
-            </p>
-          </div>
 
-          <div className="rounded-2xl border border-border/50 bg-black/10 p-4">
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-body">
-              <Scale size={14} className="text-primary" />
-              <span>License</span>
+            <div className="rounded-3xl border border-border bg-surface p-6">
+              <div className="flex items-center gap-2 text-primary">
+                <Eye size={20} />
+                <span className="font-medium">Watchers</span>
+              </div>
+
+              <p className="mt-4 text-3xl font-bold text-heading">
+                {repository.watchers.toLocaleString()}
+              </p>
             </div>
-            <p className="mt-2 font-bold text-heading text-sm truncate">
-              {repository.licenseName ?? "No license specified"}
-            </p>
-          </div>
 
-          <div className="rounded-2xl border border-border/50 bg-black/10 p-4">
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-body">
-              <HardDrive size={14} className="text-primary" />
-              <span>Repo Size</span>
+            <div className="rounded-3xl border border-border bg-surface p-6">
+              <div className="flex items-center gap-2 text-primary">
+                <CalendarDays size={20} />
+                <span className="font-medium">Language</span>
+              </div>
+
+              <p className="mt-4 text-xl font-bold text-heading">
+                {repository.language ?? "Unknown"}
+              </p>
             </div>
-            <p className="mt-2 font-bold text-heading text-lg">
-              {formatSize(repository.size)}
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 pt-4 border-t border-border/60">
-          <div>
-            <p className="text-sm text-body">Created Date</p>
-            <p className="mt-1 font-semibold text-heading">{createdDate}</p>
           </div>
 
-          <div>
-            <p className="text-sm text-body">Last Updated</p>
-            <p className="mt-1 font-semibold text-heading">{updatedDate}</p>
-          </div>
-        </div>
-      </div>
+          {/* Repository Insights & Metadata Grid */}
+          <div className="rounded-3xl border border-border bg-surface p-8">
+            <h2 className="text-xl font-bold text-heading">
+              Repository Metadata & Insights
+            </h2>
 
-      {/* Topics Pill Badge Section */}
-      {repository.topics && repository.topics.length > 0 && (
-        <div className="rounded-3xl border border-border bg-surface p-8">
-          <div className="flex items-center gap-2 mb-4">
-            <Tag size={18} className="text-primary" />
-            <h2 className="text-xl font-bold text-heading">Topics</h2>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="rounded-2xl border border-border/50 bg-black/10 p-4">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-body">
+                  <GitBranch size={14} className="text-primary" />
+                  <span>Default Branch</span>
+                </div>
+                <p className="mt-2 font-mono font-bold text-heading text-lg">
+                  {repository.defaultBranch ?? "N/A"}
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-border/50 bg-black/10 p-4">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-body">
+                  <CircleDot size={14} className="text-primary" />
+                  <span>Open Issues</span>
+                </div>
+                <p className="mt-2 font-bold text-heading text-lg">
+                  {repository.openIssues != null ? repository.openIssues.toLocaleString() : "N/A"}
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-border/50 bg-black/10 p-4">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-body">
+                  <Scale size={14} className="text-primary" />
+                  <span>License</span>
+                </div>
+                <p className="mt-2 font-bold text-heading text-sm truncate">
+                  {repository.licenseName ?? "No license specified"}
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-border/50 bg-black/10 p-4">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-body">
+                  <HardDrive size={14} className="text-primary" />
+                  <span>Repo Size</span>
+                </div>
+                <p className="mt-2 font-bold text-heading text-lg">
+                  {formatSize(repository.size)}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 pt-4 border-t border-border/60">
+              <div>
+                <p className="text-sm text-body">Created Date</p>
+                <p className="mt-1 font-semibold text-heading">{createdDate}</p>
+              </div>
+
+              <div>
+                <p className="text-sm text-body">Last Updated</p>
+                <p className="mt-1 font-semibold text-heading">{updatedDate}</p>
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-2.5">
-            {repository.topics.map((topic) => (
-              <span
-                key={topic}
-                className="rounded-full bg-primary/10 border border-primary/20 px-3.5 py-1.5 text-xs font-semibold text-primary transition-all hover:bg-primary/20"
-              >
-                #{topic}
-              </span>
-            ))}
-          </div>
-        </div>
+          {/* Topics Pill Badge Section */}
+          {repository.topics && repository.topics.length > 0 && (
+            <div className="rounded-3xl border border-border bg-surface p-8">
+              <div className="flex items-center gap-2 mb-4">
+                <Tag size={18} className="text-primary" />
+                <h2 className="text-xl font-bold text-heading">Topics</h2>
+              </div>
+
+              <div className="flex flex-wrap gap-2.5">
+                {repository.topics.map((topic) => (
+                  <span
+                    key={topic}
+                    className="rounded-full bg-primary/10 border border-primary/20 px-3.5 py-1.5 text-xs font-semibold text-primary transition-all hover:bg-primary/20"
+                  >
+                    #{topic}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Repository Activity (Branch Selector & Commit History) */}
+          <RepositoryActivity
+            username={username}
+            repositoryName={repository.name}
+            defaultBranch={repository.defaultBranch}
+          />
+
+          {/* README Preview Card Component */}
+          <ReadmePreviewCard
+            username={username}
+            repositoryName={repository.name}
+          />
+        </>
       )}
 
-      {/* Repository Activity (Branch Selector & Commit History) */}
-      <RepositoryActivity
-        username={username}
-        repositoryName={repository.name}
-        defaultBranch={repository.defaultBranch}
-      />
+      {/* Tab 2: Contributor Analytics */}
+      {activeTab === "contributors" && (
+        <ContributorAnalytics
+          username={username}
+          repositoryName={repository.name}
+        />
+      )}
 
-      {/* README Preview Card Component */}
-      <ReadmePreviewCard
-        username={username}
-        repositoryName={repository.name}
-      />
+      {/* Tab 3: Commit Activity & Trends */}
+      {activeTab === "activity" && (
+        <CommitActivityTrends
+          username={username}
+          repositoryName={repository.name}
+        />
+      )}
     </section>
   );
 }
