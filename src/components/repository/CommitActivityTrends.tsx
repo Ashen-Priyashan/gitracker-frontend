@@ -42,15 +42,28 @@ export default function CommitActivityTrends({
       setLoading(true);
       setError(null);
 
-      const [actRes, freqRes, partRes] = await Promise.all([
+      const [actResult, freqResult, partResult] = await Promise.allSettled([
         getRepositoryCommitActivity(username, repositoryName),
         getRepositoryCodeFrequency(username, repositoryName),
         getRepositoryParticipation(username, repositoryName),
       ]);
 
-      setActivity(actRes);
-      setCodeFreq(freqRes);
-      setParticipation(partRes);
+      if (actResult.status === "rejected") {
+        setError("Failed to load commit activity and trends.");
+        return;
+      }
+
+      setActivity(actResult.value);
+      setCodeFreq(
+        freqResult.status === "fulfilled"
+          ? freqResult.value
+          : { status: "CALCULATING", weeklyStats: [] }
+      );
+      setParticipation(
+        partResult.status === "fulfilled"
+          ? partResult.value
+          : { status: "CALCULATING", allCommits: [], ownerCommits: [] }
+      );
     } catch {
       setError("Failed to load commit activity and trends.");
     } finally {
@@ -66,16 +79,30 @@ export default function CommitActivityTrends({
         setLoading(true);
         setError(null);
 
-        const [actRes, freqRes, partRes] = await Promise.all([
+        const [actResult, freqResult, partResult] = await Promise.allSettled([
           getRepositoryCommitActivity(username, repositoryName),
           getRepositoryCodeFrequency(username, repositoryName),
           getRepositoryParticipation(username, repositoryName),
         ]);
 
         if (!isMounted) return;
-        setActivity(actRes);
-        setCodeFreq(freqRes);
-        setParticipation(partRes);
+
+        if (actResult.status === "rejected") {
+          setError("Failed to load commit activity and trends.");
+          return;
+        }
+
+        setActivity(actResult.value);
+        setCodeFreq(
+          freqResult.status === "fulfilled"
+            ? freqResult.value
+            : { status: "CALCULATING", weeklyStats: [] }
+        );
+        setParticipation(
+          partResult.status === "fulfilled"
+            ? partResult.value
+            : { status: "CALCULATING", allCommits: [], ownerCommits: [] }
+        );
       } catch {
         if (isMounted) setError("Failed to load commit activity and trends.");
       } finally {
