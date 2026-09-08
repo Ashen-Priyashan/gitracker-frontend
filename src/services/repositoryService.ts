@@ -5,6 +5,12 @@ import type {
   CommitDetail,
   CommitSummary,
 } from "../types/repositoryActivity";
+import type {
+  CodeFrequencyResponse,
+  CommitActivityResponse,
+  Contributor,
+  ParticipationResponse,
+} from "../types/repositoryIntelligence";
 
 const getRepositories = async (
   username: string,
@@ -82,6 +88,50 @@ const getRepositoryCommitDetail = async (
   return response.data;
 };
 
+const getRepositoryContributors = async (
+  username: string,
+  repoName: string,
+): Promise<Contributor[]> => {
+  const response = await apiClient.get<Contributor[]>(
+    `/api/users/${encodeURIComponent(username)}/repositories/${encodeURIComponent(repoName)}/contributors`,
+  );
+
+  return response.data;
+};
+
+const getRepositoryCommitActivity = async (
+  username: string,
+  repoName: string,
+): Promise<CommitActivityResponse> => {
+  const response = await apiClient.get<CommitActivityResponse>(
+    `/api/users/${encodeURIComponent(username)}/repositories/${encodeURIComponent(repoName)}/stats/commit-activity`,
+  );
+
+  return response.data;
+};
+
+const getRepositoryCodeFrequency = async (
+  username: string,
+  repoName: string,
+): Promise<CodeFrequencyResponse> => {
+  const response = await apiClient.get<CodeFrequencyResponse>(
+    `/api/users/${encodeURIComponent(username)}/repositories/${encodeURIComponent(repoName)}/stats/code-frequency`,
+  );
+
+  return response.data;
+};
+
+const getRepositoryParticipation = async (
+  username: string,
+  repoName: string,
+): Promise<ParticipationResponse> => {
+  const response = await apiClient.get<ParticipationResponse>(
+    `/api/users/${encodeURIComponent(username)}/repositories/${encodeURIComponent(repoName)}/stats/participation`,
+  );
+
+  return response.data;
+};
+
 export {
   getRepositories,
   getRepositoryDetails,
@@ -89,4 +139,8 @@ export {
   getRepositoryBranches,
   getRepositoryCommits,
   getRepositoryCommitDetail,
+  getRepositoryContributors,
+  getRepositoryCommitActivity,
+  getRepositoryCodeFrequency,
+  getRepositoryParticipation,
 };
