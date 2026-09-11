@@ -10,8 +10,8 @@ function MainLayout() {
     useState(false);
 
   return (
-    <div className="min-h-screen bg-background lg:flex">
-      <div className="hidden lg:block">
+    <div className="min-h-screen bg-background text-heading lg:flex">
+      <div className="hidden lg:block shrink-0">
         <Sidebar />
       </div>
 
@@ -20,12 +20,12 @@ function MainLayout() {
         onClose={() => setDrawerOpen(false)}
       />
 
-      <div className="flex min-h-screen flex-1 flex-col">
+      <div className="flex min-h-screen flex-1 flex-col min-w-0">
         <MobileHeader
           onMenuClick={() => setDrawerOpen(true)}
         />
 
-        <main className="flex-1 p-4 sm:p-6 lg:overflow-y-auto lg:p-8">
+        <main className="flex-1 px-4 py-6 sm:px-8 sm:py-8 lg:px-12 lg:py-10 max-w-6xl w-full mx-auto">
           <Outlet />
         </main>
       </div>

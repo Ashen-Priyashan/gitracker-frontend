@@ -27,49 +27,48 @@ function ApiStatusCard() {
   }, []);
 
   return (
-    <div className="mt-8 rounded-2xl border border-border bg-background p-4">
-      <div className="flex items-center gap-2">
-        <Activity size={18} className={isOnline ? "text-success" : "text-amber-500"} />
-        <h3 className="font-semibold text-heading">API Status</h3>
-      </div>
-
-      <p className="mt-3 text-sm text-body">Backend Service</p>
-
-      <div className="mt-2 flex items-center gap-2">
-        <span
-          className={`h-2 w-2 rounded-full ${
-            isOnline === null
-              ? "bg-slate-400 animate-pulse"
-              : isOnline
-              ? "bg-success"
-              : "bg-red-500"
-          }`}
-        />
-        <span
-          className={`text-sm font-medium ${
-            isOnline === null
-              ? "text-slate-400"
-              : isOnline
-              ? "text-success"
-              : "text-red-500"
-          }`}
-        >
-          {isOnline === null ? "Checking..." : isOnline ? "Operational" : "Unavailable"}
+    <div className="rounded-xl border border-border/80 bg-surface-hover/50 p-3 space-y-2 text-xs">
+      <div className="flex items-center justify-between">
+        <span className="font-semibold text-heading flex items-center gap-1.5">
+          <Activity size={13} className={isOnline ? "text-success" : "text-amber-500"} />
+          API Status
         </span>
+        <div className="flex items-center gap-1.5">
+          <span
+            className={`h-1.5 w-1.5 rounded-full ${
+              isOnline === null
+                ? "bg-muted animate-pulse"
+                : isOnline
+                ? "bg-success"
+                : "bg-danger"
+            }`}
+          />
+          <span
+            className={`text-[11px] font-medium ${
+              isOnline === null
+                ? "text-muted"
+                : isOnline
+                ? "text-success"
+                : "text-danger"
+            }`}
+          >
+            {isOnline === null ? "Checking..." : isOnline ? "Operational" : "Offline"}
+          </span>
+        </div>
       </div>
 
-      <p className="mt-4 text-xs text-body">GitHub Integration</p>
-      <div className="mt-1 flex items-center gap-1.5 text-xs font-medium">
+      <div className="flex items-center justify-between pt-1 border-t border-border/50 text-[11px]">
+        <span className="text-muted">GitHub Mode</span>
         {user?.githubUsername ? (
-          <>
-            <CheckCircle2 size={13} className="text-success shrink-0" />
-            <span className="text-heading truncate">@{user.githubUsername}</span>
-          </>
+          <span className="flex items-center gap-1 font-medium text-heading truncate max-w-[120px]">
+            <CheckCircle2 size={11} className="text-success shrink-0" />
+            @{user.githubUsername}
+          </span>
         ) : (
-          <>
-            <AlertCircle size={13} className="text-amber-500 shrink-0" />
-            <span className="text-body">Public Rate Limit</span>
-          </>
+          <span className="flex items-center gap-1 text-muted">
+            <AlertCircle size={11} className="text-amber-500 shrink-0" />
+            Public API
+          </span>
         )}
       </div>
     </div>
