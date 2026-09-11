@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ShieldCheck, Sparkles, UserPlus } from "lucide-react";
 import FeatureCards from "../components/cards/FeatureCards";
 import Hero from "../components/hero/Hero";
+import SearchBar from "../components/hero/SearchBar";
+import PopularSearches from "../components/hero/PopularSearches";
 import StatisticsSection from "../components/statistics/StatisticsSection";
 import { useAuth } from "../hooks/useAuth";
 
