@@ -19,30 +19,29 @@ function AnalyticsSummary({
   const { username } = useParams<{ username: string }>();
 
   return (
-    <section>
-      <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <section className="space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-            Analytics
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+            Telemetry
           </p>
-
-          <h2 className="mt-2 text-2xl font-bold text-heading">
-            Developer overview
+          <h2 className="mt-0.5 text-xl font-bold tracking-tight text-heading">
+            Developer Overview
           </h2>
         </div>
 
         {username && (
           <Link
             to={`/profile/${encodeURIComponent(username)}/analytics`}
-            className="flex items-center gap-2 text-sm font-semibold text-primary transition hover:opacity-80"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline self-start sm:self-auto"
           >
-            View analytics
-            <ArrowRight size={17} />
+            <span>View Full Analytics</span>
+            <ArrowRight size={13} />
           </Link>
         )}
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-3">
         <AnalyticsCard
           icon={FolderGit2}
           label="Repositories"

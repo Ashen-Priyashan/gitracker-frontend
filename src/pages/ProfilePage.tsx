@@ -73,8 +73,39 @@ function ProfilePage() {
   }, [username]);
 
   useEffect(() => {
-    fetchProfile();
-  }, [fetchProfile]);
+    let isMounted = true;
+
+    async function load() {
+      if (!username) {
+        setError("GitHub username is required.");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setError(null);
+        const profileSummary = await getProfileSummary(username);
+        if (isMounted) {
+          setProfile(profileSummary);
+          addRecentSearch(profileSummary.user.username);
+        }
+      } catch (requestError) {
+        if (isMounted) {
+          setError(formatErrorMessage(requestError));
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    }
+
+    load();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [username]);
 
   if (loading) {
     return <ProfileLoading />;
@@ -91,7 +122,7 @@ function ProfilePage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-10 py-2">
       <ProfileHeader user={profile.user} />
 
       <AnalyticsSummary analytics={profile.analytics} />

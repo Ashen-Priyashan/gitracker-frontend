@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, FolderGit2, ShieldCheck, Sparkles, UserPlus } from "lucide-react";
+import { ArrowRight, ShieldCheck, Sparkles, UserPlus } from "lucide-react";
 import FeatureCards from "../components/cards/FeatureCards";
 import Hero from "../components/hero/Hero";
 import StatisticsSection from "../components/statistics/StatisticsSection";
