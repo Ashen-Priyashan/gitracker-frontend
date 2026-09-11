@@ -67,17 +67,17 @@ function ReadmePreviewCard({
   };
 
   return (
-    <div className="rounded-3xl border border-border bg-surface p-6 sm:p-8 shadow-sm">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-border/60 pb-5">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-            <FileText size={20} />
-          </div>
-          <div>
-            <h3 className="text-xl font-bold text-heading">
+    <div className="rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 shadow-xs">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-border/60 pb-4">
+        <div className="flex items-center gap-2.5">
+          <FileText size={18} className="text-muted" />
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-semibold tracking-tight text-heading">
               README Preview
             </h3>
-            <p className="text-xs text-body font-mono">README.md</p>
+            <span className="rounded bg-surface-hover px-1.5 py-0.5 text-2xs font-mono text-muted">
+              README.md
+            </span>
           </div>
         </div>
 
@@ -85,17 +85,17 @@ function ReadmePreviewCard({
           {readme?.content && (
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1.5 rounded-xl border border-border px-3 py-1.5 text-xs font-semibold text-body hover:bg-surface-hover hover:text-heading transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border/70 bg-surface px-2.5 py-1 text-xs font-medium text-body hover:text-heading hover:bg-surface-hover transition-colors"
               title="Copy README content"
             >
               {copied ? (
                 <>
-                  <Check size={14} className="text-emerald-500" />
+                  <Check size={13} className="text-emerald-500" />
                   <span>Copied</span>
                 </>
               ) : (
                 <>
-                  <Copy size={14} />
+                  <Copy size={13} className="text-muted" />
                   <span>Copy</span>
                 </>
               )}
@@ -107,62 +107,63 @@ function ReadmePreviewCard({
               href={readme.htmlUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 rounded-xl bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/20 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border/70 bg-surface px-2.5 py-1 text-xs font-medium text-muted hover:text-heading hover:bg-surface-hover transition-colors"
             >
               <span>View Raw</span>
-              <ExternalLink size={14} />
+              <ExternalLink size={12} />
             </a>
           )}
         </div>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-4">
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-12 text-body">
-            <div className="h-7 w-7 animate-spin rounded-full border-2 border-primary border-t-transparent mb-3" />
-            <p className="text-sm font-medium">Fetching README content...</p>
+          <div className="flex flex-col items-center justify-center py-12 text-muted">
+            <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent mb-2.5" />
+            <p className="text-xs font-medium">Fetching README content...</p>
           </div>
         ) : error ? (
-          <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-6 text-center text-sm text-red-500">
+          <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-5 text-center text-xs text-red-500">
             {error}
           </div>
         ) : !readme?.exists || !readme.content ? (
-          <div className="rounded-2xl border border-dashed border-border p-8 text-center text-body">
-            <FileText size={32} className="mx-auto text-body/40 mb-2" />
-            <p className="font-medium text-heading">No README file found</p>
-            <p className="text-xs text-body mt-1">
+          <div className="rounded-xl border border-dashed border-border/80 p-8 text-center text-muted">
+            <FileText size={28} className="mx-auto text-muted/50 mb-2" />
+            <p className="text-sm font-medium text-heading">No README file found</p>
+            <p className="text-xs text-muted mt-0.5">
               This repository does not have a README file.
             </p>
           </div>
         ) : (
           <div>
             <div
-              className={`relative overflow-hidden rounded-2xl bg-black/20 p-6 font-mono text-sm leading-relaxed text-body transition-all duration-300 ${
-                isExpanded ? "max-h-none" : "max-h-80"
+              className={`relative overflow-hidden rounded-xl border border-border/50 bg-surface-hover/30 dark:bg-black/25 p-4 sm:p-5 font-mono text-xs sm:text-sm leading-relaxed text-body transition-all duration-200 ${
+                isExpanded ? "max-h-none" : "max-h-72"
               }`}
             >
-              <pre className="whitespace-pre-wrap font-mono break-words">
+              <pre className="whitespace-pre-wrap font-mono break-words select-text">
                 {readme.content}
               </pre>
 
               {!isExpanded && (
-                <div className="absolute inset-x-0 bottom-0 flex h-24 items-end justify-center bg-gradient-to-t from-surface via-surface/80 to-transparent pb-2" />
+                <div className="absolute inset-x-0 bottom-0 flex h-20 items-end justify-center bg-gradient-to-t from-surface via-surface/90 to-transparent pointer-events-none pb-2" />
               )}
             </div>
 
             <button
+              type="button"
               onClick={() => setIsExpanded(!isExpanded)}
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-heading hover:bg-surface-hover transition-colors"
+              className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg border border-border/70 bg-surface py-2 text-xs font-medium text-body hover:text-heading hover:bg-surface-hover transition-colors"
             >
               {isExpanded ? (
                 <>
                   <span>Collapse README</span>
-                  <ChevronUp size={16} />
+                  <ChevronUp size={14} />
                 </>
               ) : (
                 <>
                   <span>Show Full README</span>
-                  <ChevronDown size={16} />
+                  <ChevronDown size={14} />
                 </>
               )}
             </button>

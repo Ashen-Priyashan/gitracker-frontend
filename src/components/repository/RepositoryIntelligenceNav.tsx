@@ -18,26 +18,32 @@ export default function RepositoryIntelligenceNav({
   ];
 
   return (
-    <div className="flex flex-wrap items-center gap-2 border-b border-border/60 pb-3">
-      {tabs.map((tab) => {
-        const Icon = tab.icon;
-        const isActive = activeTab === tab.id;
-        return (
-          <button
-            key={tab.id}
-            type="button"
-            onClick={() => onSelectTab(tab.id)}
-            className={`flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-all ${
-              isActive
-                ? "bg-primary text-white shadow-xs"
-                : "bg-surface text-body hover:bg-surface-hover hover:text-heading border border-border/60"
-            }`}
-          >
-            <Icon size={16} />
-            <span>{tab.label}</span>
-          </button>
-        );
-      })}
+    <div className="flex items-center overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+      <div
+        aria-label="Repository navigation"
+        className="inline-flex items-center gap-1 rounded-xl border border-border/80 bg-surface-hover/70 p-1 text-xs sm:text-sm select-none"
+      >
+        {tabs.map((tab) => {
+          const Icon = tab.icon;
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              aria-selected={isActive}
+              onClick={() => onSelectTab(tab.id)}
+              className={`flex items-center gap-2 rounded-lg px-3.5 py-1.5 font-medium transition-all duration-150 active:scale-[0.98] ${
+                isActive
+                  ? "bg-surface text-heading font-semibold shadow-xs border border-border/50"
+                  : "text-body hover:text-heading hover:bg-surface/50"
+              }`}
+            >
+              <Icon size={15} />
+              <span>{tab.label}</span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
