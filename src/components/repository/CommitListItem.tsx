@@ -22,7 +22,7 @@ export default function CommitListItem({
     <button
       type="button"
       onClick={() => onSelect(commit.sha)}
-      className="group flex w-full flex-col gap-3 rounded-2xl border border-border bg-surface p-4 text-left transition-all hover:border-primary/50 hover:bg-surface-hover/80 hover:shadow-xs focus:outline-hidden focus:ring-2 focus:ring-primary sm:flex-row sm:items-center sm:justify-between"
+      className="group flex w-full flex-col gap-2.5 sm:gap-3 rounded-xl border border-border/70 bg-surface/70 px-4 py-3 text-left transition-all duration-150 hover:border-border hover:bg-surface-hover/80 active:scale-[0.995] focus:outline-hidden focus:ring-2 focus:ring-primary/20 sm:flex-row sm:items-center sm:justify-between shadow-2xs"
     >
       <div className="flex items-start gap-3 min-w-0">
         {/* Author Avatar or Initial Fallback */}
@@ -31,32 +31,32 @@ export default function CommitListItem({
             <img
               src={commit.authorAvatarUrl}
               alt={commit.authorName || "Author avatar"}
-              className="h-8 w-8 rounded-full border border-border/80 object-cover"
+              className="h-7 w-7 rounded-full border border-border/70 object-cover"
               loading="lazy"
             />
           ) : (
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-bold uppercase">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-hover text-muted border border-border/70 text-2xs font-bold uppercase">
               {commit.authorName ? (
                 commit.authorName.slice(0, 2).toUpperCase()
               ) : (
-                <User size={14} />
+                <User size={12} />
               )}
             </div>
           )}
         </div>
 
         {/* Message and Author Meta */}
-        <div className="min-w-0 flex-1 space-y-1">
-          <p className="truncate text-sm font-semibold text-heading group-hover:text-primary transition-colors">
+        <div className="min-w-0 flex-1 space-y-0.5">
+          <p className="truncate text-xs sm:text-sm font-semibold text-heading group-hover:text-primary transition-colors">
             {firstLineMessage}
           </p>
 
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-body">
-            <span className="font-medium text-heading/80">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-muted">
+            <span className="font-medium text-body">
               {commit.authorName}
             </span>
             {commit.authorLogin && (
-              <span className="text-body/70">@{commit.authorLogin}</span>
+              <span className="text-muted">@{commit.authorLogin}</span>
             )}
             <span>·</span>
             <span>{displayTime}</span>
@@ -66,8 +66,8 @@ export default function CommitListItem({
 
       {/* SHA badge */}
       <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
-        <span className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1 font-mono text-xs font-semibold text-primary group-hover:border-primary/40 transition-colors">
-          <GitCommit size={13} />
+        <span className="inline-flex items-center gap-1.5 rounded-md border border-border/80 bg-surface px-2 py-0.5 font-mono text-2xs font-medium text-muted group-hover:text-heading group-hover:border-border transition-colors">
+          <GitCommit size={11} className="text-muted" />
           {commit.shortSha}
         </span>
       </div>

@@ -14,43 +14,45 @@ function AnalyticsDetails({
   ).toLocaleString();
 
   return (
-    <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
-      <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-        Analytics Details
-      </p>
+    <section className="rounded-2xl border border-border/80 bg-surface p-6 sm:p-8 space-y-6">
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+          Engine Metadata
+        </p>
 
-      <h2 className="mt-2 text-2xl font-bold text-heading">
-        Developer analytics summary
-      </h2>
+        <h2 className="mt-1 text-xl font-bold tracking-tight text-heading">
+          Analytics Summary & Verification
+        </h2>
+      </div>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2">
-        <div className="flex items-center gap-4 rounded-2xl border border-border bg-surface p-5">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-            <UserRound size={22} />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="flex items-center gap-3 rounded-xl border border-border/60 bg-surface-hover/50 p-4">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-surface text-heading border border-border/60 shrink-0">
+            <UserRound size={17} strokeWidth={1.8} />
           </div>
 
-          <div>
-            <p className="text-sm text-body">
-              GitHub User
+          <div className="min-w-0">
+            <p className="text-xs text-muted font-medium">
+              Analyzed Subject
             </p>
 
-            <p className="mt-1 font-semibold text-heading">
+            <p className="mt-0.5 font-semibold text-heading truncate text-sm sm:text-base">
               @{analytics.githubUser.username}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 rounded-2xl border border-border bg-surface p-5">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-            <CalendarDays size={22} />
+        <div className="flex items-center gap-3 rounded-xl border border-border/60 bg-surface-hover/50 p-4">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-surface text-heading border border-border/60 shrink-0">
+            <CalendarDays size={17} strokeWidth={1.8} />
           </div>
 
-          <div>
-            <p className="text-sm text-body">
-              Analytics Calculated
+          <div className="min-w-0">
+            <p className="text-xs text-muted font-medium">
+              Last Calculated
             </p>
 
-            <p className="mt-1 break-all font-semibold text-heading">
+            <p className="mt-0.5 font-semibold text-heading truncate text-sm sm:text-base">
               {calculatedDate}
             </p>
           </div>

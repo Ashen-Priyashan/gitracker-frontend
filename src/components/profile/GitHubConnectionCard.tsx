@@ -93,37 +93,37 @@ export function GitHubConnectionCard({ onStatusChange }: GitHubConnectionCardPro
   };
 
   return (
-    <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8 transition-all">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
-        <div className="flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-            <FolderGit2 size={26} />
+    <section className="rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 shadow-xs space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/60 pb-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-hover text-muted">
+            <FolderGit2 size={18} />
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold text-heading">
+            <h2 className="text-sm sm:text-base font-semibold tracking-tight text-heading">
               GitHub Account Connection
             </h2>
 
-            <p className="mt-1 text-sm text-body">
-              Connect Gitracker to your GitHub account to access granted private data and repositories.
+            <p className="text-2xs text-muted">
+              Connect GitTracker to access authenticated repository insights
             </p>
           </div>
         </div>
 
         <div>
           {loading ? (
-            <span className="inline-flex items-center rounded-full bg-border px-4 py-2 text-sm font-semibold text-body">
+            <span className="inline-flex items-center rounded-full bg-surface-hover px-3 py-1 text-2xs font-medium text-muted">
               Checking status...
             </span>
           ) : status.connected ? (
-            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-500">
-              <ShieldCheck size={18} />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-2xs font-medium text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+              <ShieldCheck size={13} />
               Connected
             </span>
           ) : (
-            <span className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-4 py-2 text-sm font-semibold text-amber-500">
-              <ShieldAlert size={18} />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-hover border border-border/80 px-3 py-1 text-2xs font-medium text-muted">
+              <ShieldAlert size={13} />
               Not Connected
             </span>
           )}
@@ -131,32 +131,32 @@ export function GitHubConnectionCard({ onStatusChange }: GitHubConnectionCardPro
       </div>
 
       {error && (
-        <div className="mt-6 rounded-2xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-500">
+        <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-3.5 text-xs text-red-600 dark:text-red-400">
           {error}
         </div>
       )}
 
       {status.connected ? (
-        <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-2xl border border-border p-5 bg-background/50">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-xl border border-border/70 p-4 bg-surface-hover/30">
+          <div className="flex items-center gap-3">
             {status.avatarUrl ? (
               <img
                 src={status.avatarUrl}
                 alt={status.username || "GitHub Avatar"}
-                className="h-12 w-12 rounded-full border border-border"
+                className="h-10 w-10 rounded-full border border-border/80 object-cover"
               />
             ) : (
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-hover text-muted font-bold text-xs">
                 {status.username?.charAt(0).toUpperCase() || "G"}
               </div>
             )}
 
             <div>
-              <p className="font-semibold text-heading text-lg">
+              <p className="font-semibold text-heading text-sm">
                 @{status.username}
               </p>
 
-              <p className="text-xs text-body">
+              <p className="text-2xs text-muted">
                 Connected on {status.connectedAt ? new Date(status.connectedAt).toLocaleDateString() : "Active Session"}
               </p>
             </div>
@@ -165,32 +165,32 @@ export function GitHubConnectionCard({ onStatusChange }: GitHubConnectionCardPro
           <button
             onClick={handleDisconnect}
             disabled={actionLoading}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-500/10 px-4 py-2.5 text-sm font-semibold text-red-500 hover:bg-red-500/20 transition-colors disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-red-500/30 bg-surface px-3 py-1.5 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-500/10 transition-colors disabled:opacity-50"
           >
-            <LogOut size={16} />
-            {actionLoading ? "Disconnecting..." : "Disconnect GitHub"}
+            <LogOut size={13} />
+            {actionLoading ? "Disconnecting..." : "Disconnect"}
           </button>
         </div>
       ) : (
-        <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-2xl border border-border p-5">
-          <div className="text-sm text-body space-y-1">
-            <div className="flex items-center gap-2 text-heading font-medium">
-              <CheckCircle2 size={16} className="text-primary" />
-              Secure, server-side token storage
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl border border-border/70 p-4 bg-surface-hover/20">
+          <div className="text-xs text-body space-y-1.5">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 size={14} className="text-muted shrink-0" />
+              <span>Secure server-side token encryption and management</span>
             </div>
 
-            <div className="flex items-center gap-2 text-heading font-medium">
-              <CheckCircle2 size={16} className="text-primary" />
-              Access authorized private repositories with your permission
+            <div className="flex items-center gap-2">
+              <CheckCircle2 size={14} className="text-muted shrink-0" />
+              <span>Access authorized private repositories with granted permissions</span>
             </div>
           </div>
 
           <button
             onClick={handleConnect}
             disabled={actionLoading || loading}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white shadow-md hover:opacity-95 transition-all disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-medium text-white shadow-2xs hover:opacity-95 transition-opacity disabled:opacity-50 shrink-0"
           >
-            <FolderGit2 size={18} />
+            <FolderGit2 size={14} />
             {actionLoading ? "Connecting..." : "Connect GitHub"}
           </button>
         </div>

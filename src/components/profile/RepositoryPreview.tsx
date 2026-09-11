@@ -15,31 +15,31 @@ function RepositoryPreview({
   const { username } = useParams<{ username: string }>();
 
   return (
-    <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <section className="space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-            Repositories
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+            Codebases
           </p>
 
-          <h2 className="mt-2 text-2xl font-bold text-heading">
-            Repository overview
+          <h2 className="mt-0.5 text-xl font-bold tracking-tight text-heading">
+            Repositories
           </h2>
         </div>
 
         {username && (
           <Link
             to={`/profile/${encodeURIComponent(username)}/repositories`}
-            className="flex items-center gap-2 text-sm font-semibold text-primary transition hover:opacity-80"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline self-start sm:self-auto"
           >
-            View all
-            <ArrowRight size={17} />
+            <span>View All ({repositories.length})</span>
+            <ArrowRight size={13} />
           </Link>
         )}
       </div>
 
       {previewRepositories.length > 0 ? (
-        <div className="mt-6 grid gap-5 lg:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {previewRepositories.map((repository) => (
             <RepositoryCard
               key={repository.name}
@@ -48,9 +48,9 @@ function RepositoryPreview({
           ))}
         </div>
       ) : (
-        <p className="mt-6 text-body">
-          No repositories available.
-        </p>
+        <div className="rounded-2xl border border-border/80 bg-surface p-8 text-center text-sm text-body">
+          No public repositories available for this user.
+        </div>
       )}
     </section>
   );

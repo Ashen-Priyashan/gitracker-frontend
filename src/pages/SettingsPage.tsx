@@ -36,132 +36,147 @@ function SettingsPage() {
   }, [searchParams, setSearchParams]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 py-2">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-          Application
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+          Preferences & Account
         </p>
 
-        <h1 className="mt-2 text-2xl font-bold tracking-tight text-heading sm:text-3xl">
+        <h1 className="mt-1 text-2xl sm:text-3xl font-bold tracking-tight text-heading">
           Settings
         </h1>
 
-        <p className="mt-3 max-w-2xl text-body">
-          Customize your GitTracker experience, manage GitHub account permissions, and view application
-          information.
+        <p className="mt-1 text-xs sm:text-sm text-body max-w-2xl">
+          Customize your GitTracker experience, manage GitHub account permissions, and view application specifications.
         </p>
       </div>
 
       {notification && (
         <div
-          className={`flex items-center justify-between rounded-2xl border p-4 text-sm font-medium ${
+          className={`flex items-center justify-between rounded-xl border p-3.5 text-xs sm:text-sm font-medium ${
             notification.type === "success"
-              ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-500"
-              : "border-red-500/20 bg-red-500/10 text-red-500"
+              ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+              : "border-red-500/20 bg-red-500/10 text-red-600 dark:text-red-400"
           }`}
         >
-          <div className="flex items-center gap-3">
-            {notification.type === "success" ? <CheckCircle2 size={20} /> : <XCircle size={20} />}
+          <div className="flex items-center gap-2.5">
+            {notification.type === "success" ? (
+              <CheckCircle2 size={18} className="text-emerald-500 shrink-0" />
+            ) : (
+              <XCircle size={18} className="text-red-500 shrink-0" />
+            )}
             <span>{notification.message}</span>
           </div>
 
           <button
             onClick={() => setNotification(null)}
-            className="text-xs uppercase tracking-wider underline hover:opacity-80"
+            className="text-xs uppercase tracking-wider underline hover:opacity-75"
           >
             Dismiss
           </button>
         </div>
       )}
 
+      {/* GitHub Account Connection Card */}
       <GitHubConnectionCard />
 
-      <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-3">
-            <Moon className="text-primary" size={26} />
-
-            <h2 className="text-2xl font-bold text-heading">
-              Appearance
-            </h2>
+      {/* Appearance Section */}
+      <section className="rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 shadow-xs space-y-4">
+        <div className="flex items-center justify-between border-b border-border/60 pb-3.5">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-hover text-muted">
+              <Moon size={16} />
+            </div>
+            <div>
+              <h2 className="text-sm font-semibold tracking-tight text-heading">
+                Appearance
+              </h2>
+              <p className="text-2xs text-muted">
+                Display theme mode configuration
+              </p>
+            </div>
           </div>
 
-          <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+          <span className="rounded-full border border-border/80 bg-surface-hover px-3 py-1 text-xs font-medium text-heading">
             {theme === "dark" ? "Dark Mode" : "Light Mode"}
           </span>
         </div>
 
-        <p className="mt-6 text-body">
-          Use the theme button in the sidebar or mobile menu to switch
-          between light and dark mode.
+        <p className="text-xs leading-relaxed text-body">
+          Use the theme toggle in the sidebar or header navigation to seamlessly transition between macOS Light and Dark palettes.
         </p>
       </section>
 
-      <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
-        <div className="flex items-center gap-3">
-          <Info className="text-primary" size={26} />
-
-          <h2 className="text-2xl font-bold text-heading">
-            Application
-          </h2>
+      {/* System Specifications Section */}
+      <section className="rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 shadow-xs space-y-4">
+        <div className="flex items-center gap-2.5 border-b border-border/60 pb-3.5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-hover text-muted">
+            <Info size={16} />
+          </div>
+          <div>
+            <h2 className="text-sm font-semibold tracking-tight text-heading">
+              Application Specifications
+            </h2>
+            <p className="text-2xs text-muted">
+              Runtime environment and engine build version
+            </p>
+          </div>
         </div>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-border p-5">
-            <p className="text-sm text-body">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="rounded-xl border border-border/70 bg-surface p-3.5 shadow-2xs">
+            <p className="text-2xs font-semibold uppercase tracking-wider text-muted">
               Version
             </p>
-
-            <p className="mt-1 font-semibold text-heading">
+            <p className="mt-1 font-mono text-xs font-semibold text-heading">
               1.0.0
             </p>
           </div>
 
-          <div className="rounded-2xl border border-border p-5">
-            <p className="text-sm text-body">
+          <div className="rounded-xl border border-border/70 bg-surface p-3.5 shadow-2xs">
+            <p className="text-2xs font-semibold uppercase tracking-wider text-muted">
               Framework
             </p>
-
-            <p className="mt-1 font-semibold text-heading">
+            <p className="mt-1 text-xs font-semibold text-heading">
               React + Vite
             </p>
           </div>
 
-          <div className="rounded-2xl border border-border p-5">
-            <p className="text-sm text-body">
+          <div className="rounded-xl border border-border/70 bg-surface p-3.5 shadow-2xs">
+            <p className="text-2xs font-semibold uppercase tracking-wider text-muted">
               Styling
             </p>
-
-            <p className="mt-1 font-semibold text-heading">
+            <p className="mt-1 text-xs font-semibold text-heading">
               Tailwind CSS
             </p>
           </div>
 
-          <div className="rounded-2xl border border-border p-5">
-            <p className="text-sm text-body">
+          <div className="rounded-xl border border-border/70 bg-surface p-3.5 shadow-2xs">
+            <p className="text-2xs font-semibold uppercase tracking-wider text-muted">
               Backend
             </p>
-
-            <p className="mt-1 font-semibold text-heading">
+            <p className="mt-1 text-xs font-semibold text-heading">
               Spring Boot
             </p>
           </div>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
-        <div className="flex items-center gap-3">
-          <Settings className="text-primary" size={26} />
-
-          <h2 className="text-2xl font-bold text-heading">
+      {/* About GitTracker Section */}
+      <section className="rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 shadow-xs space-y-3">
+        <div className="flex items-center gap-2.5 border-b border-border/60 pb-3.5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-hover text-muted">
+            <Settings size={16} />
+          </div>
+          <h2 className="text-sm font-semibold tracking-tight text-heading">
             About GitTracker
           </h2>
         </div>
 
-        <p className="mt-6 leading-7 text-body">
-          GitTracker is a GitHub analytics platform that helps developers
-          explore profile statistics, repository insights and developer
-          activity through a clean and modern interface.
+        <p className="text-xs leading-relaxed text-body">
+          GitTracker is a developer intelligence platform engineered with Apple's visual philosophy:
+          clarity, hierarchy, and restraint. It delivers deep repository analytics, commit activity trends,
+          and contributor insights without visual clutter.
         </p>
       </section>
     </div>

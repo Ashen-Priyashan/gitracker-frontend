@@ -74,48 +74,47 @@ export function ConnectGithubPage() {
   };
 
   return (
-    <div className="flex min-h-[85vh] w-full items-center justify-center p-4 sm:p-6">
-      <div className="w-full max-w-xl space-y-8 rounded-3xl border border-border bg-surface p-8 shadow-xl">
-        <div className="text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-sm">
-            <FolderGit2 size={32} />
+    <div className="flex min-h-[80vh] w-full items-center justify-center p-4 sm:p-6">
+      <div className="w-full max-w-lg space-y-6 rounded-2xl border border-border/80 bg-surface p-6 sm:p-8 shadow-lg">
+        {/* Title */}
+        <div className="text-center space-y-1.5">
+          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-surface-hover text-muted shadow-2xs">
+            <FolderGit2 size={20} />
           </div>
 
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-primary">
+          <p className="text-2xs font-semibold uppercase tracking-wider text-muted">
             Step 2 of 2
           </p>
 
-          <h1 className="mt-1 text-3xl font-bold tracking-tight text-heading sm:text-4xl">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-heading">
             Connect your GitHub Profile
           </h1>
 
-          <p className="mt-3 text-base text-body">
-            Welcome, <span className="font-semibold text-heading">{user?.name}</span>! Connect your GitHub profile to unlock your Gitracker analytics dashboard.
+          <p className="text-xs text-muted max-w-sm mx-auto">
+            Welcome, <span className="font-semibold text-heading">{user?.name}</span>. Link your GitHub identity to activate your developer portfolio.
           </p>
         </div>
 
         {/* Primary Option: Quick Link via GitHub Username */}
-        <div className="rounded-2xl border border-primary/30 bg-primary/5 p-6 space-y-4">
-          <div className="flex items-center gap-2 font-semibold text-heading text-base">
-            <Sparkles size={18} className="text-primary" />
-            <span>Instant Access: Link your GitHub Username</span>
+        <div className="rounded-xl border border-border/80 bg-surface-hover/30 p-4 sm:p-5 space-y-3">
+          <div className="flex items-center gap-2 font-semibold text-heading text-xs sm:text-sm">
+            <Sparkles size={15} className="text-primary" />
+            <span>Instant Access: Link GitHub Username</span>
           </div>
 
-          <p className="text-xs text-body leading-relaxed">
-            Link your public GitHub profile to instantly view your repositories, languages, commit frequency, and developer score.
+          <p className="text-2xs text-muted leading-relaxed">
+            Link your public GitHub profile to instantly view your repositories, languages, commit frequency, and activity trends.
           </p>
 
-          <form onSubmit={handleLinkUsername} className="space-y-3">
-            <div className="relative">
-              <input
-                type="text"
-                value={usernameInput}
-                onChange={(e) => setUsernameInput(e.target.value)}
-                placeholder="e.g. Ashen-Priyashan, octocat, torvalds"
-                disabled={linking}
-                className="w-full rounded-xl border border-border bg-background px-4 py-3.5 text-sm text-heading placeholder:text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-              />
-            </div>
+          <form onSubmit={handleLinkUsername} className="space-y-2.5">
+            <input
+              type="text"
+              value={usernameInput}
+              onChange={(e) => setUsernameInput(e.target.value)}
+              placeholder="e.g. octocat, torvalds, gaearon"
+              disabled={linking}
+              className="w-full rounded-xl border border-border/80 bg-surface px-3 py-2.5 text-xs text-heading placeholder:text-muted focus:border-primary/50 focus:outline-hidden transition-colors"
+            />
 
             {error && (
               <p className="text-xs text-red-500 font-medium">{error}</p>
@@ -124,29 +123,29 @@ export function ConnectGithubPage() {
             <button
               type="submit"
               disabled={linking || !usernameInput.trim()}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-bold text-white shadow-md hover:opacity-95 transition-all disabled:opacity-50"
+              className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-primary py-2.5 text-xs font-semibold text-white shadow-2xs hover:opacity-95 active:scale-[0.99] transition-all disabled:opacity-50 cursor-pointer"
             >
-              <span>{linking ? "Linking Profile..." : "Link Profile & Launch Dashboard"}</span>
-              <ArrowRight size={16} />
+              <span>{linking ? "Linking Profile..." : "Link Profile & Launch"}</span>
+              <ArrowRight size={13} />
             </button>
           </form>
         </div>
 
         {/* Secondary Option: Connect via OAuth App */}
-        <div className="rounded-2xl border border-border bg-background/50 p-5 space-y-3 text-xs text-body">
+        <div className="rounded-xl border border-border/70 bg-surface p-4 space-y-2.5 text-xs text-muted">
           <div className="flex items-center justify-between">
-            <span className="font-semibold text-heading text-sm">OAuth App Connection</span>
-            <span className="rounded-full bg-border/60 px-2.5 py-0.5 text-[10px] font-medium text-muted">
+            <span className="font-semibold text-heading text-xs">OAuth App Authorization</span>
+            <span className="rounded-full bg-surface-hover border border-border/70 px-2 py-0.5 text-2xs font-medium text-muted">
               Advanced
             </span>
           </div>
 
-          <p className="leading-relaxed">
-            If you have configured a registered GitHub OAuth App, you can connect for private repository access.
+          <p className="text-2xs leading-relaxed">
+            For authenticated private repository access, connect via registered OAuth App.
           </p>
 
           {oauthWarning && (
-            <div className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-3 text-amber-600 dark:text-amber-400">
+            <div className="rounded-lg border border-amber-500/20 bg-amber-500/10 p-2.5 text-2xs text-amber-600 dark:text-amber-400">
               {oauthWarning}
             </div>
           )}
@@ -155,48 +154,48 @@ export function ConnectGithubPage() {
             type="button"
             onClick={handleConnectOAuth}
             disabled={oauthLoading}
-            className="flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-surface py-2.5 text-xs font-semibold text-heading hover:bg-background transition-all disabled:opacity-50"
+            className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-border/80 bg-surface py-2 text-xs font-medium text-heading hover:bg-surface-hover transition-colors disabled:opacity-50"
           >
-            <FolderGit2 size={16} />
+            <FolderGit2 size={13} />
             {oauthLoading ? "Redirecting to GitHub..." : "Authorize with GitHub OAuth"}
           </button>
         </div>
 
         {/* Security Info */}
-        <div className="rounded-2xl border border-border/60 p-4 text-xs text-muted space-y-2">
-          <div className="flex items-center gap-2 font-medium text-heading">
-            <ShieldCheck size={16} className="text-emerald-500" />
-            Security & Privacy
+        <div className="rounded-xl border border-border/60 bg-surface-hover/20 p-3.5 text-2xs text-muted space-y-1.5">
+          <div className="flex items-center gap-1.5 font-medium text-heading text-xs">
+            <ShieldCheck size={14} className="text-emerald-500" />
+            <span>Security & Privacy</span>
           </div>
-          <div className="space-y-1.5 pl-6 text-[11px]">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 size={13} className="text-emerald-500" />
+          <div className="space-y-1 pl-4 text-2xs">
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 size={11} className="text-emerald-500 shrink-0" />
               <span>Only public metadata accessed unless explicitly authorized</span>
             </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 size={13} className="text-emerald-500" />
-              <span>You can update or disconnect your linked profile at any time in Settings</span>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 size={11} className="text-emerald-500 shrink-0" />
+              <span>You can update or disconnect linked profiles at any time in Settings</span>
             </div>
           </div>
         </div>
 
         {/* Actions */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+        <div className="flex items-center justify-between gap-3 pt-2 border-t border-border/60">
           <button
             type="button"
             onClick={() => navigate("/")}
             className="text-xs font-medium text-muted hover:text-heading transition-colors"
           >
-            Explore Public Repositories First &rarr;
+            Explore Public Repositories &rarr;
           </button>
 
           <button
             type="button"
             onClick={logout}
-            className="flex items-center gap-1.5 text-xs font-semibold text-red-500 hover:text-red-600 transition-colors"
+            className="flex items-center gap-1 text-xs font-medium text-red-500 hover:text-red-600 transition-colors"
           >
-            <LogOut size={14} />
-            Log Out
+            <LogOut size={13} />
+            <span>Log Out</span>
           </button>
         </div>
       </div>

@@ -3,33 +3,30 @@ import PopularSearches from "./PopularSearches";
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-border bg-surface px-6 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-16">
-      <div className="relative z-10 max-w-3xl">
-        <span className="inline-flex rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-primary">
-          GitHub Profile Analytics
-        </span>
+    <section className="relative py-8 sm:py-14 lg:py-18">
+      <div className="max-w-3xl space-y-6">
+        <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1 text-xs font-medium text-body">
+          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+          <span>GitHub Developer Intelligence</span>
+        </div>
 
-        <h1 className="mt-6 text-4xl font-bold tracking-tight text-heading sm:text-5xl">
-          Analyze GitHub Profiles
-          <span className="block text-primary">
-            with Powerful Insights
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-heading leading-[1.08]">
+          Explore any developer. <br />
+          <span className="text-body font-normal">
+            Understand their craft.
           </span>
         </h1>
 
-        <p className="mt-6 max-w-2xl text-base leading-7 text-body sm:text-lg sm:leading-8">
-          Search GitHub users, explore repositories, and discover developer
-          analytics through one simple dashboard.
+        <p className="max-w-2xl text-base sm:text-lg text-body leading-relaxed font-normal">
+          Deep telemetry across repositories, language distributions, commit frequencies,
+          and contributor networks in one calm interface.
         </p>
 
-        <div className="mt-8">
+        <div className="pt-2">
           <SearchBar />
           <PopularSearches />
         </div>
       </div>
-
-      <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
-
-      <div className="absolute -bottom-32 right-40 h-72 w-72 rounded-full bg-border/40 blur-3xl" />
     </section>
   );
 }

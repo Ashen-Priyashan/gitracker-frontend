@@ -17,30 +17,40 @@ function RepositoryCard({
       to={`/profile/${encodeURIComponent(
         username ?? "",
       )}/repositories/${encodeURIComponent(repository.name)}`}
-      className="block"
+      className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-2xl"
     >
-      <article className="rounded-2xl border border-border bg-surface p-5 transition duration-200 hover:-translate-y-1 hover:shadow-md">
-        <h3 className="font-semibold text-heading">
-          {repository.name}
-        </h3>
+      <article className="flex h-full flex-col justify-between rounded-2xl border border-border/80 bg-surface p-5 transition-colors duration-150 hover:bg-surface-hover/80 hover:border-border">
+        <div>
+          <div className="flex items-start justify-between gap-3">
+            <h3 className="font-semibold text-heading tracking-tight group-hover:text-primary transition-colors truncate">
+              {repository.name}
+            </h3>
 
-        <p className="mt-2 min-h-12 text-sm leading-6 text-body">
-          {repository.description ?? "No description available."}
-        </p>
+            {repository.language && (
+              <span className="shrink-0 rounded-md bg-surface-hover px-2 py-0.5 text-[11px] font-medium text-body border border-border/60">
+                {repository.language}
+              </span>
+            )}
+          </div>
 
-        <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-body">
-          <span className="font-medium text-primary">
-            {repository.language ?? "Unknown"}
-          </span>
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-body line-clamp-2">
+            {repository.description ?? "No description provided."}
+          </p>
+        </div>
 
+        <div className="mt-4 flex items-center gap-4 pt-3 border-t border-border/40 text-xs text-muted">
           <div className="flex items-center gap-1.5">
-            <Star size={16} />
-            <span>{repository.stars.toLocaleString()}</span>
+            <Star size={13} className="text-muted" />
+            <span className="tabular-nums font-medium text-heading">
+              {repository.stars.toLocaleString()}
+            </span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <GitFork size={16} />
-            <span>{repository.forks.toLocaleString()}</span>
+            <GitFork size={13} className="text-muted" />
+            <span className="tabular-nums font-medium text-heading">
+              {repository.forks.toLocaleString()}
+            </span>
           </div>
         </div>
       </article>

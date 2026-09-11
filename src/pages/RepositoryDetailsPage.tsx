@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import RepositoryDetailsCard from "../components/repository/RepositoryDetailsCard";
 import ProfileError from "../components/profile/ProfileError";
@@ -83,19 +83,35 @@ function RepositoryDetailsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl space-y-6">
+    <div className="space-y-6 py-2">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-          Repository
-        </p>
+        <div className="flex items-center gap-2 text-xs font-medium text-muted mb-3 flex-wrap">
+          <Link
+            to={`/profile/${encodeURIComponent(username ?? "")}`}
+            className="hover:text-heading transition-colors"
+          >
+            @{username}
+          </Link>
+          <span>/</span>
+          <Link
+            to={`/profile/${encodeURIComponent(username ?? "")}/repositories`}
+            className="hover:text-heading transition-colors"
+          >
+            repositories
+          </Link>
+          <span>/</span>
+          <span className="text-heading font-semibold">{repository.name}</span>
+        </div>
 
-        <h1 className="mt-2 break-all text-3xl font-bold tracking-tight text-heading">
-          {repository.name}
-        </h1>
+        <div className="flex flex-col gap-1">
+          <h1 className="break-all text-2xl sm:text-3xl font-bold tracking-tight text-heading">
+            {repository.name}
+          </h1>
 
-        <p className="mt-3 max-w-2xl text-body">
-          Repository details and statistics.
-        </p>
+          <p className="text-xs sm:text-sm text-body max-w-2xl">
+            Repository intelligence, commit activity, contributor rankings, and code telemetry.
+          </p>
+        </div>
       </div>
 
       <RepositoryDetailsCard

@@ -119,31 +119,31 @@ export default function CommitActivityTrends({
 
   if (loading) {
     return (
-      <div className="rounded-3xl border border-border bg-surface p-6 sm:p-8 space-y-6 animate-pulse">
-        <div className="h-6 w-56 rounded-lg bg-surface-hover" />
-        <div className="grid gap-5 sm:grid-cols-3">
+      <div className="rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 space-y-5 animate-pulse">
+        <div className="h-5 w-52 rounded-lg bg-surface-hover" />
+        <div className="grid gap-3 sm:grid-cols-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-28 rounded-2xl bg-surface-hover/60" />
+            <div key={i} className="h-24 rounded-xl bg-surface-hover/60" />
           ))}
         </div>
-        <div className="h-56 rounded-2xl bg-surface-hover/40" />
+        <div className="h-48 rounded-xl bg-surface-hover/40" />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="rounded-3xl border border-rose-500/20 bg-surface p-8 text-center space-y-4">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-500/10 text-rose-500">
-          <AlertCircle size={24} />
+      <div className="rounded-2xl border border-red-500/20 bg-surface p-6 sm:p-8 text-center space-y-3">
+        <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/10 text-red-500">
+          <AlertCircle size={20} />
         </div>
-        <p className="text-heading font-medium">{error}</p>
+        <p className="text-xs sm:text-sm font-medium text-heading">{error}</p>
         <button
           type="button"
           onClick={loadData}
-          className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover transition-colors"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-border/80 bg-surface px-3 py-1.5 text-xs font-medium text-heading hover:bg-surface-hover transition-colors"
         >
-          <RefreshCw size={14} />
+          <RefreshCw size={12} />
           <span>Retry</span>
         </button>
       </div>
@@ -173,17 +173,17 @@ export default function CommitActivityTrends({
     totalAllYearCommits > 0 ? (totalOwnerYearCommits / totalAllYearCommits) * 100 : 0;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Calculating Status Banner */}
       {isCalculating && (
-        <div className="rounded-3xl border border-amber-500/30 bg-amber-500/10 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/20 text-amber-500">
-              <Clock size={20} className="animate-spin" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-500/20 text-amber-500 shrink-0">
+              <Clock size={18} className="animate-spin" />
             </div>
             <div>
-              <h4 className="font-semibold text-heading">Statistics Calculating</h4>
-              <p className="text-xs text-body">
+              <h4 className="text-xs sm:text-sm font-semibold text-heading">Statistics Calculating</h4>
+              <p className="text-2xs sm:text-xs text-muted">
                 GitHub is currently calculating activity statistics for this repository.
               </p>
             </div>
@@ -191,79 +191,82 @@ export default function CommitActivityTrends({
           <button
             type="button"
             onClick={loadData}
-            className="inline-flex items-center gap-2 rounded-xl bg-surface border border-border px-4 py-2 text-xs font-semibold text-heading hover:bg-surface-hover transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border/80 bg-surface px-3 py-1.5 text-xs font-medium text-heading hover:bg-surface-hover transition-colors shrink-0"
           >
-            <RefreshCw size={14} />
+            <RefreshCw size={12} />
             <span>Check Again</span>
           </button>
         </div>
       )}
 
       {/* Main Stats Cards Grid */}
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <div className="rounded-3xl border border-border bg-surface p-6 shadow-xs">
-          <div className="flex items-center gap-2 text-emerald-500">
-            <PlusCircle size={20} />
-            <span className="font-medium text-sm">Total Additions</span>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="rounded-xl border border-border/70 bg-surface p-4 sm:p-5 shadow-2xs">
+          <div className="flex items-center gap-1.5 text-xs font-medium text-muted">
+            <PlusCircle size={14} className="text-emerald-500" />
+            <span>Total Additions</span>
           </div>
-          <p className="mt-4 text-3xl font-bold text-heading">
+          <p className="mt-2 text-2xl sm:text-3xl font-semibold tracking-tight text-heading tabular-nums">
             +{totalAdditions.toLocaleString()}
           </p>
-          <p className="mt-1 text-xs text-body">Lines of code added</p>
+          <p className="mt-0.5 text-2xs text-muted">Lines of code added</p>
         </div>
 
-        <div className="rounded-3xl border border-border bg-surface p-6 shadow-xs">
-          <div className="flex items-center gap-2 text-rose-500">
-            <MinusCircle size={20} />
-            <span className="font-medium text-sm">Total Deletions</span>
+        <div className="rounded-xl border border-border/70 bg-surface p-4 sm:p-5 shadow-2xs">
+          <div className="flex items-center gap-1.5 text-xs font-medium text-muted">
+            <MinusCircle size={14} className="text-rose-500" />
+            <span>Total Deletions</span>
           </div>
-          <p className="mt-4 text-3xl font-bold text-heading">
+          <p className="mt-2 text-2xl sm:text-3xl font-semibold tracking-tight text-heading tabular-nums">
             -{totalDeletions.toLocaleString()}
           </p>
-          <p className="mt-1 text-xs text-body">Lines of code removed</p>
+          <p className="mt-0.5 text-2xs text-muted">Lines of code removed</p>
         </div>
 
-        <div className="rounded-3xl border border-border bg-surface p-6 shadow-xs sm:col-span-2 lg:col-span-1">
-          <div className="flex items-center gap-2 text-primary">
-            <Code2 size={20} />
-            <span className="font-medium text-sm">Net Code Change</span>
+        <div className="rounded-xl border border-border/70 bg-surface p-4 sm:p-5 shadow-2xs sm:col-span-2 lg:col-span-1">
+          <div className="flex items-center gap-1.5 text-xs font-medium text-muted">
+            <Code2 size={14} className="text-primary" />
+            <span>Net Code Change</span>
           </div>
           <p
-            className={`mt-4 text-3xl font-bold ${
-              netGrowth >= 0 ? "text-emerald-500" : "text-rose-500"
+            className={`mt-2 text-2xl sm:text-3xl font-semibold tracking-tight tabular-nums ${
+              netGrowth >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
             }`}
           >
             {netGrowth >= 0 ? `+${netGrowth.toLocaleString()}` : netGrowth.toLocaleString()}
           </p>
-          <p className="mt-1 text-xs text-body">Net codebase expansion</p>
+          <p className="mt-0.5 text-2xs text-muted">Net codebase expansion</p>
         </div>
       </div>
 
       {/* 52-Week Commit Activity Trend */}
-      <div className="rounded-3xl border border-border bg-surface p-6 sm:p-8 shadow-xs space-y-6">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-border/60 pb-5">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <Activity size={20} />
+      <div className="rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 shadow-xs space-y-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-border/60 pb-4">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-hover text-muted">
+              <Activity size={18} />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-heading">Commit Activity (Past 52 Weeks)</h3>
-              <p className="text-xs text-body">
+              <h3 className="text-sm sm:text-base font-semibold tracking-tight text-heading">
+                Commit Activity (Past 52 Weeks)
+              </h3>
+              <p className="text-2xs text-muted">
                 Weekly commit distribution over the past year
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 text-xs">
+          <div className="flex items-center gap-3 text-xs text-muted">
             <div>
-              <span className="text-body">Annual Commits: </span>
-              <span className="font-bold text-heading">
+              <span>Annual Commits: </span>
+              <span className="font-semibold text-heading tabular-nums">
                 {activity?.totalYearCommits.toLocaleString() ?? 0}
               </span>
             </div>
+            <span>·</span>
             <div>
-              <span className="text-body">Peak Week: </span>
-              <span className="font-bold text-heading">{maxWeeklyCommits}</span>
+              <span>Peak Week: </span>
+              <span className="font-semibold text-heading tabular-nums">{maxWeeklyCommits}</span>
             </div>
           </div>
         </div>
@@ -271,7 +274,7 @@ export default function CommitActivityTrends({
         {/* 52-Week Activity Histogram */}
         {weeks.length > 0 ? (
           <div className="space-y-2">
-            <div className="flex h-40 items-end gap-1 sm:gap-1.5 pt-4 pb-2">
+            <div className="flex h-36 items-end gap-1 sm:gap-1.5 pt-3 pb-1">
               {weeks.map((week, idx) => {
                 const heightPercent =
                   maxWeeklyCommits > 0 ? (week.totalCommits / maxWeeklyCommits) * 100 : 0;
@@ -287,32 +290,32 @@ export default function CommitActivityTrends({
                   >
                     <div
                       style={{ height: `${Math.max(heightPercent, 4)}%` }}
-                      className={`w-full rounded-t-sm transition-all duration-300 ${
+                      className={`w-full rounded-t-sm transition-all duration-200 ${
                         week.totalCommits > 0
                           ? "bg-primary hover:bg-primary-hover"
-                          : "bg-surface-hover/40"
+                          : "bg-surface-hover/50"
                       }`}
                     />
 
                     {/* Tooltip on Hover */}
-                    <div className="pointer-events-none absolute bottom-full mb-2 hidden flex-col items-center group-hover:flex z-20">
-                      <div className="rounded-lg bg-heading px-2.5 py-1 text-[11px] font-medium text-surface shadow-md whitespace-nowrap">
+                    <div className="pointer-events-none absolute bottom-full mb-1.5 hidden flex-col items-center group-hover:flex z-20">
+                      <div className="rounded-md bg-heading px-2 py-1 text-2xs font-medium text-surface shadow-md whitespace-nowrap">
                         <p>{weekDate}</p>
-                        <p className="font-bold">{week.totalCommits} commits</p>
+                        <p className="font-semibold tabular-nums">{week.totalCommits} commits</p>
                       </div>
                     </div>
                   </div>
                 );
               })}
             </div>
-            <div className="flex justify-between text-xs text-body pt-2 border-t border-border/40">
+            <div className="flex justify-between text-2xs text-muted pt-2 border-t border-border/60">
               <span>52 weeks ago</span>
               <span>26 weeks ago</span>
               <span>This week</span>
             </div>
           </div>
         ) : (
-          <p className="text-sm text-body py-8 text-center">
+          <p className="text-xs text-muted py-6 text-center">
             {isCalculating
               ? "Calculating weekly commit activity..."
               : "No commit activity records available for this repository."}
@@ -321,54 +324,56 @@ export default function CommitActivityTrends({
       </div>
 
       {/* Participation Breakdown: Owner vs Community */}
-      <div className="rounded-3xl border border-border bg-surface p-6 sm:p-8 shadow-xs space-y-6">
-        <div className="flex items-center gap-3 border-b border-border/60 pb-5">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-            <Users size={20} />
+      <div className="rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 shadow-xs space-y-4">
+        <div className="flex items-center gap-2.5 border-b border-border/60 pb-3.5">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-hover text-muted">
+            <Users size={18} />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-heading">Participation Breakdown</h3>
-            <p className="text-xs text-body">
-              Commit split between the repository owner and community contributors
+            <h3 className="text-sm sm:text-base font-semibold tracking-tight text-heading">
+              Participation Breakdown
+            </h3>
+            <p className="text-2xs text-muted">
+              Commit split between repository owner and community contributors
             </p>
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
-          <div className="rounded-2xl border border-border/60 bg-black/10 p-5 space-y-2">
-            <div className="flex justify-between text-xs text-body">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="rounded-xl border border-border/70 bg-surface p-4 space-y-2 shadow-2xs">
+            <div className="flex justify-between text-xs text-muted">
               <span>Owner Commits (52 Weeks)</span>
-              <span className="font-bold text-heading">{totalOwnerYearCommits.toLocaleString()}</span>
+              <span className="font-semibold text-heading tabular-nums">{totalOwnerYearCommits.toLocaleString()}</span>
             </div>
-            <div className="flex justify-between text-xs text-body">
+            <div className="flex justify-between text-xs text-muted">
               <span>Community Commits</span>
-              <span className="font-bold text-heading">
+              <span className="font-semibold text-heading tabular-nums">
                 {(totalAllYearCommits - totalOwnerYearCommits).toLocaleString()}
               </span>
             </div>
 
-            <div className="pt-3">
-              <div className="flex justify-between text-xs font-semibold mb-1">
-                <span className="text-primary">Owner Share: {ownerShare.toFixed(1)}%</span>
-                <span className="text-emerald-500">
+            <div className="pt-2">
+              <div className="flex justify-between text-xs font-medium mb-1">
+                <span className="text-primary tabular-nums">Owner Share: {ownerShare.toFixed(1)}%</span>
+                <span className="text-emerald-600 dark:text-emerald-400 tabular-nums">
                   Community: {(100 - ownerShare).toFixed(1)}%
                 </span>
               </div>
-              <div className="h-2.5 w-full overflow-hidden rounded-full bg-emerald-500/30 flex">
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-hover flex">
                 <div
-                  className="h-full bg-primary transition-all duration-500"
+                  className="h-full bg-primary transition-all duration-300"
                   style={{ width: `${ownerShare}%` }}
                 />
               </div>
             </div>
           </div>
 
-          <div className="rounded-2xl border border-border/60 bg-black/10 p-5 flex flex-col justify-center space-y-2">
+          <div className="rounded-xl border border-border/70 bg-surface p-4 flex flex-col justify-center space-y-1.5 shadow-2xs">
             <div className="flex items-center gap-2">
-              <TrendingUp size={18} className="text-primary" />
-              <h4 className="font-bold text-heading text-sm">Collaboration Balance</h4>
+              <TrendingUp size={16} className="text-primary" />
+              <h4 className="font-semibold text-heading text-xs">Collaboration Balance</h4>
             </div>
-            <p className="text-xs text-body leading-relaxed">
+            <p className="text-xs text-muted leading-relaxed">
               {ownerShare > 85
                 ? "This repository is primarily maintained by the owner with limited external contributor activity."
                 : ownerShare < 40

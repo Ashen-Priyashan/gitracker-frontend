@@ -12,16 +12,16 @@ function FeatureCard({
   description,
 }: FeatureCardProps) {
   return (
-    <article className="group rounded-3xl border border-border bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
-      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors duration-200 group-hover:bg-primary group-hover:text-white">
-        <Icon size={24} />
+    <article className="group rounded-2xl border border-border/80 bg-surface p-6 transition-colors duration-150 hover:bg-surface-hover/80">
+      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-hover text-heading border border-border/60">
+        <Icon size={20} strokeWidth={1.8} />
       </div>
 
-      <h3 className="mt-5 text-lg font-semibold text-heading">
+      <h3 className="mt-4 text-base font-semibold text-heading tracking-tight">
         {title}
       </h3>
 
-      <p className="mt-2 text-sm leading-6 text-body">
+      <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-body">
         {description}
       </p>
     </article>

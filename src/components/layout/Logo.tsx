@@ -2,18 +2,17 @@ import { FolderGit2 } from "lucide-react";
 
 function Logo() {
   return (
-    <div className="flex items-center gap-3">
-      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white">
-        <FolderGit2 size={22} />
+    <div className="flex items-center gap-3 select-none">
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-heading text-surface dark:bg-white dark:text-black shadow-xs">
+        <FolderGit2 size={18} strokeWidth={2.2} />
       </div>
 
       <div>
-        <h1 className="text-2xl font-bold text-heading">
+        <h1 className="text-base font-semibold tracking-tight text-heading leading-none">
           GitTracker
         </h1>
-
-        <p className="text-sm text-body">
-          GitHub Analytics
+        <p className="mt-1 text-[11px] font-medium tracking-wide text-muted uppercase">
+          Intelligence
         </p>
       </div>
     </div>

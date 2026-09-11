@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import ProfileError from "../components/profile/ProfileError";
 import RepositoryListLoading from "../components/loading/RepositoryListLoading";
@@ -86,22 +86,31 @@ function RepositoryPage() {
   if (error) return <ProfileError message={error} />;
 
   return (
-    <div>
+    <div className="space-y-6 py-2">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-          Repository Analytics
-        </p>
+        <Link
+          to={`/profile/${encodeURIComponent(username ?? "")}`}
+          className="inline-flex items-center gap-1 text-xs font-medium text-muted hover:text-heading transition-colors mb-3"
+        >
+          <span>&larr; Back to @{username}&apos;s profile</span>
+        </Link>
 
-        <h1 className="mt-2 text-2xl font-bold tracking-tight text-heading sm:text-3xl">
-          {username}&apos;s repositories
-        </h1>
+        <div className="flex flex-col gap-1">
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+            Repositories
+          </p>
 
-        <p className="mt-3 text-body">
-          Explore repository activity, languages, stars, forks, and watchers.
-        </p>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-heading">
+            @{username}&apos;s repositories
+          </h1>
+
+          <p className="mt-1 text-xs sm:text-sm text-body max-w-2xl">
+            Explore repository codebases, activity, language metrics, stars, and forks.
+          </p>
+        </div>
       </div>
 
-      <div className="mt-8">
+      <div className="pt-2">
         <RepositoryFilters
           search={search}
           sort={sort}
@@ -110,12 +119,15 @@ function RepositoryPage() {
         />
       </div>
 
-      <p className="mt-6 text-sm text-body">
-        Showing {displayedRepositories.length} of {repositories.length} repositories
-      </p>
+      <div className="flex items-center justify-between text-xs text-muted">
+        <span>
+          Showing <strong className="text-heading tabular-nums">{displayedRepositories.length}</strong> of{" "}
+          <span className="tabular-nums">{repositories.length}</span> repositories
+        </span>
+      </div>
 
       {displayedRepositories.length > 0 ? (
-        <div className="mt-5 grid gap-5">
+        <div className="grid gap-3 sm:gap-4">
           {displayedRepositories.map((repository) => (
             <RepositoryListCard
               key={repository.name}
@@ -124,9 +136,14 @@ function RepositoryPage() {
           ))}
         </div>
       ) : (
-        <div className="mt-5 rounded-3xl border border-border bg-surface p-10 text-center">
-          <p className="text-body">
-            No repositories match your search.
+        <div className="rounded-2xl border border-border/80 bg-surface p-12 text-center space-y-2">
+          <p className="text-base font-semibold text-heading">
+            No repositories found
+          </p>
+          <p className="text-xs sm:text-sm text-muted max-w-sm mx-auto">
+            {search
+              ? `No repositories match "${search}". Try adjusting your search query.`
+              : "This user does not have any public repositories available."}
           </p>
         </div>
       )}

@@ -11,29 +11,32 @@ function RecentSearchItem({
   return (
     <Link
       to={`/profile/${encodeURIComponent(username)}`}
-      className="group flex flex-col gap-4 rounded-2xl border border-border bg-surface p-5 transition duration-200 hover:-translate-y-0.5 hover:shadow-md sm:flex-row sm:items-center sm:justify-between"
+      className="group flex flex-col gap-3 rounded-xl border border-border/70 bg-surface p-4 transition-all duration-150 hover:border-border hover:bg-surface-hover/60 active:scale-[0.995] sm:flex-row sm:items-center sm:justify-between shadow-2xs"
     >
-      <div className="flex items-center gap-4">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-          <UserRound size={21} />
+      <div className="flex items-center gap-3 min-w-0">
+        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-hover text-muted shrink-0">
+          <UserRound size={16} />
         </div>
 
-        <div>
-          <p className="font-semibold text-heading">
-            {username}
+        <div className="min-w-0">
+          <p className="font-semibold text-heading text-sm group-hover:text-primary transition-colors truncate">
+            @{username}
           </p>
 
-          <p className="mt-1 text-sm text-body">
-            View GitHub profile analytics
+          <p className="text-2xs text-muted">
+            View developer profile analytics & repository portfolio
           </p>
         </div>
       </div>
 
-      <div className="flex justify-end">
-        <ArrowRight
-          size={19}
-          className="text-body transition group-hover:text-primary"
-        />
+      <div className="flex items-center justify-end shrink-0">
+        <span className="inline-flex items-center gap-1 text-xs font-medium text-muted group-hover:text-heading transition-colors">
+          <span>View</span>
+          <ArrowRight
+            size={13}
+            className="transition-transform group-hover:translate-x-0.5"
+          />
+        </span>
       </div>
     </Link>
   );

@@ -250,18 +250,16 @@ export default function RepositoryActivity({
   };
 
   return (
-    <div className="rounded-3xl border border-border bg-surface p-6 sm:p-8 space-y-6 shadow-xs">
+    <div className="rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 space-y-5 shadow-xs">
       {/* Header with Title & Branch Selector */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-border/60 pb-5">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-            <GitBranch size={20} />
-          </div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-border/60 pb-4">
+        <div className="flex items-center gap-2.5">
+          <GitBranch size={18} className="text-muted" />
           <div>
-            <h3 className="text-xl font-bold text-heading">
+            <h3 className="text-sm font-semibold tracking-tight text-heading">
               Repository Activity
             </h3>
-            <p className="text-xs text-body">
+            <p className="text-2xs text-muted">
               Branch selector and commit history
             </p>
           </div>

@@ -17,15 +17,30 @@ function SidebarItem({
       to={to}
       end={to === "/"}
       className={({ isActive }) =>
-        `flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition-all duration-200 hover:bg-primary/10 ${
+        `group relative flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-left transition-all duration-150 ${
           isActive
-            ? "bg-primary/10 text-primary"
-            : "text-body hover:text-primary"
+            ? "bg-heading/5 text-heading font-semibold dark:bg-white/10"
+            : "text-body font-medium hover:bg-surface-hover hover:text-heading"
         }`
       }
     >
-      <Icon size={20} />
-      <span className="font-medium">{label}</span>
+      {({ isActive }) => (
+        <>
+          {isActive && (
+            <span
+              aria-hidden="true"
+              className="absolute left-1 top-1/2 -translate-y-1/2 h-4 w-1 rounded-full bg-primary"
+            />
+          )}
+          <Icon
+            size={18}
+            className={`shrink-0 transition-colors ${
+              isActive ? "text-primary" : "text-body group-hover:text-heading"
+            }`}
+          />
+          <span className="truncate">{label}</span>
+        </>
+      )}
     </NavLink>
   );
 }

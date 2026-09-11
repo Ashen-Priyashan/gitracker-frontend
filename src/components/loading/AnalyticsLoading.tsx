@@ -2,27 +2,32 @@ import Skeleton from "./Skeleton";
 
 function AnalyticsLoading() {
   return (
-    <div className="space-y-6" role="status" aria-live="polite" aria-busy="true" aria-label="Loading analytics">
-      <div className="space-y-3">
-        <Skeleton className="h-4 w-44" />
-        <Skeleton className="h-9 w-72 max-w-full" />
-        <Skeleton className="h-5 w-full max-w-2xl" />
+    <div className="space-y-6 py-2" role="status" aria-live="polite" aria-busy="true" aria-label="Loading analytics">
+      <div className="space-y-2">
+        <Skeleton className="h-3.5 w-24" />
+        <Skeleton className="h-7 w-56 max-w-full" />
+        <Skeleton className="h-4 w-full max-w-md" />
       </div>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {Array.from({ length: 4 }, (_, index) => (
-          <div key={index} className="rounded-3xl border border-border bg-surface p-6">
-            <Skeleton className="h-12 w-12 rounded-2xl" />
-            <Skeleton className="mt-5 h-4 w-28" />
-            <Skeleton className="mt-3 h-9 w-20" />
+          <div key={index} className="rounded-xl border border-border/70 bg-surface p-4 sm:p-5 shadow-2xs">
+            <Skeleton className="h-3.5 w-20" />
+            <Skeleton className="mt-2 h-7 w-20" />
+            <Skeleton className="mt-1 h-3 w-28" />
           </div>
         ))}
       </div>
-      <div className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
-        <Skeleton className="h-4 w-36" />
-        <Skeleton className="mt-3 h-8 w-72 max-w-full" />
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
-          <Skeleton className="h-24" />
-          <Skeleton className="h-24" />
+
+      <div className="rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 shadow-xs space-y-3">
+        <Skeleton className="h-3.5 w-36" />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {Array.from({ length: 4 }, (_, index) => (
+            <div key={index} className="space-y-1.5">
+              <Skeleton className="h-3 w-20" />
+              <Skeleton className="h-4 w-28" />
+            </div>
+          ))}
         </div>
       </div>
       <span className="sr-only">Loading analytics</span>

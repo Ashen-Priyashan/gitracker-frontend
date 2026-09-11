@@ -12,22 +12,20 @@ function AnalyticsCard({
   value,
 }: AnalyticsCardProps) {
   return (
-    <article className="rounded-3xl border border-border bg-surface p-6">
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm font-medium text-body">
-            {label}
-          </p>
+    <article className="rounded-2xl border border-border/80 bg-surface p-5 transition-colors">
+      <div className="flex items-start justify-between gap-3">
+        <p className="text-xs font-medium text-muted uppercase tracking-wider">
+          {label}
+        </p>
 
-          <p className="mt-3 text-3xl font-bold tracking-tight text-heading">
-            {value}
-          </p>
-        </div>
-
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-          <Icon size={23} />
+        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-surface-hover text-muted">
+          <Icon size={15} strokeWidth={1.8} />
         </div>
       </div>
+
+      <p className="mt-3 text-3xl font-bold tracking-tight text-heading tabular-nums">
+        {value}
+      </p>
     </article>
   );
 }

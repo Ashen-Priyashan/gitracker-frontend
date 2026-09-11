@@ -7,7 +7,7 @@ function SearchBar() {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    const trimmedUsername = username.trim();
+    const trimmedUsername = username.trim().replace(/^@/, "");
 
     if (!trimmedUsername) {
       return;
@@ -17,9 +17,12 @@ function SearchBar() {
   };
 
   return (
-    <div className="flex w-full max-w-2xl flex-col gap-3 rounded-2xl border border-border bg-surface p-3 shadow-sm sm:flex-row sm:items-center sm:gap-0 sm:p-2">
-      <div className="flex flex-1 items-center">
-        <Search className="ml-3 text-body" size={21} />
+    <div className="group relative flex w-full max-w-2xl flex-col sm:flex-row items-stretch sm:items-center gap-2 rounded-2xl border border-border bg-surface p-2 shadow-sm transition-all duration-200 focus-within:border-primary/50 focus-within:ring-4 focus-within:ring-primary/10">
+      <div className="flex flex-1 items-center px-2">
+        <Search
+          size={18}
+          className="text-muted transition-colors group-focus-within:text-primary shrink-0 ml-1"
+        />
 
         <input
           type="text"
@@ -30,17 +33,29 @@ function SearchBar() {
               handleSearch();
             }
           }}
-          placeholder="Search GitHub username..."
-          className="flex-1 bg-transparent px-4 py-3 text-heading outline-none placeholder:text-body"
+          placeholder="Enter a GitHub username, e.g. torvalds..."
+          className="w-full bg-transparent px-3.5 py-2.5 text-sm sm:text-base text-heading placeholder:text-muted/70 focus:outline-none tracking-tight"
         />
+
+        {username && (
+          <button
+            type="button"
+            onClick={() => setUsername("")}
+            className="text-xs text-muted hover:text-heading px-2 py-1 rounded-md transition"
+            aria-label="Clear search input"
+          >
+            Clear
+          </button>
+        )}
       </div>
 
       <button
         type="button"
         onClick={handleSearch}
-        className="w-full rounded-xl bg-primary px-6 py-3 font-semibold text-white transition duration-200 hover:bg-primary-hover sm:w-auto"
+        className="inline-flex items-center justify-center gap-2 rounded-xl bg-heading text-surface hover:opacity-90 dark:bg-white dark:text-black dark:hover:bg-white/90 px-6 py-2.5 text-sm font-medium transition-all active:scale-[0.98] select-none"
       >
-        Analyze Profile
+        <span>Analyze</span>
+        <span className="text-xs opacity-60 font-mono">↵</span>
       </button>
     </div>
   );

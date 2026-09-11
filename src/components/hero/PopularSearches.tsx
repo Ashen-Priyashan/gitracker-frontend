@@ -14,9 +14,9 @@ function PopularSearches() {
   };
 
   return (
-    <div className="mt-5 flex flex-wrap items-center gap-3">
-      <span className="text-sm text-body">
-        Popular searches:
+    <div className="mt-4 flex flex-wrap items-center gap-2">
+      <span className="text-xs font-medium text-muted mr-1">
+        Suggested:
       </span>
 
       {popularUsers.map((username) => (
@@ -24,9 +24,9 @@ function PopularSearches() {
           key={username}
           type="button"
           onClick={() => handleProfileNavigation(username)}
-          className="rounded-lg bg-border/40 px-3 py-1.5 text-sm font-medium text-body transition duration-200 hover:bg-primary/10 hover:text-primary"
+          className="inline-flex items-center gap-1 rounded-full border border-border/80 bg-surface px-3 py-1 text-xs font-medium text-body hover:text-heading hover:border-heading/30 hover:bg-surface-hover transition-all"
         >
-          {username}
+          <span>@{username}</span>
         </button>
       ))}
     </div>

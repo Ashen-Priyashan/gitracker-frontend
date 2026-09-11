@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, FolderGit2, ShieldCheck, Sparkles, UserPlus } from "lucide-react";
+import { ArrowRight, ShieldCheck, Sparkles, UserPlus } from "lucide-react";
 import FeatureCards from "../components/cards/FeatureCards";
 import Hero from "../components/hero/Hero";
+import SearchBar from "../components/hero/SearchBar";
+import PopularSearches from "../components/hero/PopularSearches";
 import StatisticsSection from "../components/statistics/StatisticsSection";
 import { useAuth } from "../hooks/useAuth";
 
@@ -10,7 +12,7 @@ export function LandingPage() {
 
   if (user && githubConnected) {
     return (
-      <div className="space-y-8">
+      <div className="space-y-6">
         <Hero />
         <FeatureCards />
         <StatisticsSection />
@@ -19,63 +21,70 @@ export function LandingPage() {
   }
 
   return (
-    <div className="space-y-12 py-6">
-      <section className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-b from-surface via-surface to-background p-8 sm:p-12 text-center shadow-xl">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-white shadow-lg">
-          <FolderGit2 size={32} />
+    <div className="space-y-10 py-4 sm:py-8">
+      <section className="text-center max-w-3xl mx-auto space-y-6">
+        <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1 text-xs font-medium text-body">
+          <Sparkles size={13} className="text-primary" />
+          <span>Developer Analytics Platform</span>
         </div>
 
-        <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
-          <Sparkles size={14} />
-          GitHub Analytics & Insights Platform
-        </div>
-
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-heading sm:text-5xl">
-          Track, Analyze & Elevate Your <br className="hidden sm:inline" />
-          <span className="text-primary">GitHub Profile & Repositories</span>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-heading leading-[1.08]">
+          Track, analyze, and elevate <br />
+          <span className="text-body font-normal">your GitHub journey.</span>
         </h1>
 
-        <p className="mx-auto mt-4 max-w-2xl text-base text-body sm:text-lg">
-          Gitracker provides deep insights into repository activity, programming language distributions, and commit trends across your public and private GitHub projects.
+        <p className="mx-auto max-w-2xl text-base sm:text-lg text-body leading-relaxed">
+          GitTracker delivers deep telemetry into repository activity, language distributions,
+          and commit velocity across public and private GitHub projects.
         </p>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* Immediate Search Capsule for Guests */}
+        <div className="pt-2 flex flex-col items-center">
+          <SearchBar />
+          <PopularSearches />
+        </div>
+
+        {/* Auth CTAs */}
+        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
             to="/signup"
-            className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-primary px-8 py-4 text-base font-bold text-white shadow-lg hover:opacity-95 transition-all"
+            className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-heading text-surface hover:opacity-90 dark:bg-white dark:text-black dark:hover:bg-white/90 px-6 py-3 text-sm font-semibold shadow-xs transition-all active:scale-[0.99]"
           >
-            <UserPlus size={20} />
+            <UserPlus size={16} />
             Create Free Account
           </Link>
 
           <Link
             to="/login"
-            className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl border border-border bg-surface px-8 py-4 text-base font-bold text-heading hover:bg-background transition-colors"
+            className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-border bg-surface px-6 py-3 text-sm font-semibold text-heading hover:bg-surface-hover hover:border-border transition-colors"
           >
-            Log In
-            <ArrowRight size={20} />
+            <span>Sign In</span>
+            <ArrowRight size={16} />
           </Link>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs text-body font-medium">
-          <div className="flex items-center gap-2">
-            <ShieldCheck size={16} className="text-emerald-500" />
-            Mandatory GitHub Authorization Control
+        {/* Security / Privacy Trust Row */}
+        <div className="pt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted">
+          <div className="flex items-center gap-1.5">
+            <ShieldCheck size={14} className="text-success" />
+            <span>GitHub OAuth 2.0 Security</span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <ShieldCheck size={16} className="text-emerald-500" />
-            Private Repository Insights (Granted Permissions)
+          <div className="flex items-center gap-1.5">
+            <ShieldCheck size={14} className="text-success" />
+            <span>Private Repository Telemetry</span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <ShieldCheck size={16} className="text-emerald-500" />
-            Zero Credentials Exposed to Frontend
+          <div className="flex items-center gap-1.5">
+            <ShieldCheck size={14} className="text-success" />
+            <span>Zero Credential Storage</span>
           </div>
         </div>
       </section>
 
       <FeatureCards />
+
+      <StatisticsSection />
     </div>
   );
 }
