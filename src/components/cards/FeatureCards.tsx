@@ -36,15 +36,17 @@ const features = [
 
 function FeatureCards() {
   return (
-    <section className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-      {features.map((feature) => (
-        <FeatureCard
-          key={feature.title}
-          icon={feature.icon}
-          title={feature.title}
-          description={feature.description}
-        />
-      ))}
+    <section className="py-6">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {features.map((feature) => (
+          <FeatureCard
+            key={feature.title}
+            icon={feature.icon}
+            title={feature.title}
+            description={feature.description}
+          />
+        ))}
+      </div>
     </section>
   );
 }
