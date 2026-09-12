@@ -14,6 +14,11 @@ const getStoredTheme = (): Theme => {
 
 const applyTheme = (theme: Theme) => {
   document.documentElement.dataset.theme = theme;
+  if (theme === "dark") {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
 };
 
 const saveTheme = (theme: Theme) => {

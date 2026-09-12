@@ -23,7 +23,7 @@ function Sidebar() {
   const activeUsername = username || user?.githubUsername;
 
   return (
-    <aside className="sticky top-0 flex h-screen w-64 flex-col overflow-y-auto border-r border-border/70 bg-surface/60 dark:bg-[#111113]/70 backdrop-blur-xl px-3.5 py-5 select-none">
+    <aside className="sticky top-0 flex h-screen w-64 flex-col overflow-y-auto border-r border-border/80 bg-surface/80 backdrop-blur-xl px-3.5 py-5 select-none">
       <div className="px-2">
         <Logo />
       </div>
