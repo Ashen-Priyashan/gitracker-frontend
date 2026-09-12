@@ -24,6 +24,13 @@ function formatErrorMessage(error: unknown): string {
       return backendMessage || "GitHub user not found. Please check the username and try again.";
     }
     if (status === 429) {
+      const retryAfter = error.response?.data?.retryAfterSeconds;
+      if (retryAfter && retryAfter > 0) {
+        const minutes = Math.ceil(retryAfter / 60);
+        const retryNote = ` Please try again in about ${minutes} minute${minutes > 1 ? "s" : ""} (${retryAfter}s).`;
+        const baseMsg = backendMessage ? backendMessage.replace(/\.+$/, "") : "GitHub API rate limit exceeded";
+        return `${baseMsg}.${retryNote}`;
+      }
       return backendMessage || "GitHub API rate limit exceeded. Please try again in a few moments.";
     }
     if (status === 403) {

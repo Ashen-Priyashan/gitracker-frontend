@@ -71,14 +71,25 @@ function renderWithRouter(username = 'octocat') {
   );
 }
 
-function createAxiosError(status: number, message: string) {
+function createAxiosError(
+  status: number,
+  message: string,
+  retryAfterSeconds?: number,
+  resetTimeSeconds?: number
+) {
   const error = new axios.AxiosError(
     `Request failed with status code ${status}`,
     'ERR_BAD_REQUEST',
     undefined,
     undefined,
     {
-      data: { message, status, timestamp: new Date().toISOString() },
+      data: {
+        message,
+        status,
+        timestamp: new Date().toISOString(),
+        ...(retryAfterSeconds !== undefined ? { retryAfterSeconds } : {}),
+        ...(resetTimeSeconds !== undefined ? { resetTimeSeconds } : {}),
+      },
       status,
       statusText: 'Error',
       headers: {},
@@ -129,6 +140,21 @@ describe('ProfilePage', () => {
     await waitFor(() => {
       expect(
         screen.getByText(/GitHub API rate limit exceeded/i)
+      ).toBeInTheDocument();
+    });
+    expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument();
+  });
+
+  it('displays retry countdown when retryAfterSeconds is provided on 429 Too Many Requests', async () => {
+    vi.mocked(profileService.getProfileSummary).mockRejectedValue(
+      createAxiosError(429, 'GitHub API rate limit exceeded', 120)
+    );
+
+    renderWithRouter('octocat');
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Please try again in about 2 minutes \(120s\)/i)
       ).toBeInTheDocument();
     });
     expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument();

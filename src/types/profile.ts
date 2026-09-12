@@ -67,4 +67,6 @@ export type ApiError = {
   message: string;
   status: number;
   timestamp: string;
+  retryAfterSeconds?: number;
+  resetTimeSeconds?: number;
 };
