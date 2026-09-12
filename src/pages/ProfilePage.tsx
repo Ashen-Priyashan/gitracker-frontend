@@ -25,9 +25,17 @@ function formatErrorMessage(error: unknown): string {
     }
     if (status === 429) {
       const retryAfter = error.response?.data?.retryAfterSeconds;
-      if (retryAfter && retryAfter > 0) {
-        const minutes = Math.ceil(retryAfter / 60);
-        const retryNote = ` Please try again in about ${minutes} minute${minutes > 1 ? "s" : ""} (${retryAfter}s).`;
+      const resetTime = error.response?.data?.resetTimeSeconds;
+      let effectiveRetrySeconds = retryAfter;
+
+      if ((!effectiveRetrySeconds || effectiveRetrySeconds <= 0) && resetTime && resetTime > 0) {
+        const nowSeconds = Math.floor(Date.now() / 1000);
+        effectiveRetrySeconds = Math.max(0, resetTime - nowSeconds);
+      }
+
+      if (effectiveRetrySeconds && effectiveRetrySeconds > 0) {
+        const minutes = Math.ceil(effectiveRetrySeconds / 60);
+        const retryNote = ` Please try again in about ${minutes} minute${minutes > 1 ? "s" : ""} (${effectiveRetrySeconds}s).`;
         const baseMsg = backendMessage ? backendMessage.replace(/\.+$/, "") : "GitHub API rate limit exceeded";
         return `${baseMsg}.${retryNote}`;
       }

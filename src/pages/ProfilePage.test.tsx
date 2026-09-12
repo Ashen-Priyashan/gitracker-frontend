@@ -160,6 +160,22 @@ describe('ProfilePage', () => {
     expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument();
   });
 
+  it('displays retry countdown using resetTimeSeconds when retryAfterSeconds is unavailable on 429 Too Many Requests', async () => {
+    const futureResetTime = Math.floor(Date.now() / 1000) + 180;
+    vi.mocked(profileService.getProfileSummary).mockRejectedValue(
+      createAxiosError(429, 'GitHub API rate limit exceeded', undefined, futureResetTime)
+    );
+
+    renderWithRouter('octocat');
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Please try again in about 3 minutes/i)
+      ).toBeInTheDocument();
+    });
+    expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument();
+  });
+
   it('displays forbidden access message on 403 Forbidden', async () => {
     vi.mocked(profileService.getProfileSummary).mockRejectedValue(
       createAxiosError(403, 'GitHub access to this resource is currently unavailable.')
