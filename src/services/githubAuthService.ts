@@ -1,4 +1,5 @@
 import apiClient from "../api/apiClient";
+import { ensureCsrfToken } from "./authService";
 import type { Repository } from "../types/profile";
 
 export interface GitHubConnectionStatus {
@@ -28,6 +29,7 @@ export const githubAuthService = {
   },
 
   disconnectGitHub: async (): Promise<DisconnectResponse> => {
+    await ensureCsrfToken();
     const response = await apiClient.post<DisconnectResponse>("/api/github/disconnect");
     return response.data;
   },
