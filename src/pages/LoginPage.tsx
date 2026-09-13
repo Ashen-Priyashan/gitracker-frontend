@@ -32,8 +32,17 @@ export function LoginPage() {
     } catch (err: unknown) {
       console.error("Login failed:", err);
       let msg = "Invalid email or password. Please try again.";
-      if (axios.isAxiosError<{ message?: string }>(err) && err.response?.data?.message) {
-        msg = err.response.data.message;
+      if (axios.isAxiosError<{ message?: string; retryAfterSeconds?: number }>(err)) {
+        if (err.response?.status === 429) {
+          const retryHeader = err.response.headers?.["retry-after"];
+          const retryBody = err.response.data?.retryAfterSeconds;
+          const retrySeconds = retryHeader ? parseInt(retryHeader, 10) : retryBody;
+          msg = retrySeconds && !isNaN(retrySeconds)
+            ? `Too many login attempts. Please wait ${retrySeconds} seconds before trying again.`
+            : "Too many login attempts. Please wait a few minutes before trying again.";
+        } else if (err.response?.data?.message) {
+          msg = err.response.data.message;
+        }
       }
       setError(msg);
     } finally {
