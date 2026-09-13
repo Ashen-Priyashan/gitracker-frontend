@@ -18,9 +18,13 @@ function SettingsPage() {
       };
     }
     if (errorParam) {
+      const message =
+        errorParam === "account_already_linked"
+          ? "This GitHub account is already linked to another GitTracker account."
+          : `GitHub authorization failed (${errorParam}). Please try again.`;
       return {
         type: "error",
-        message: `GitHub authorization failed (${errorParam}). Please try again.`,
+        message,
       };
     }
     return null;
